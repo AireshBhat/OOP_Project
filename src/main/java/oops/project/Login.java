@@ -10,10 +10,10 @@ import java.io.IOException;
 
 public class Login {
     // Create an object from user class
-    User user;
-    protected User init() {
+    FrameControl fm = new FrameControl();
+    protected void init(User user) {
         JFrame jFrame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         JTextField userNameTextField = new JTextField("Username");
         userNameTextField.setBounds(500, 100, 100, 40);
@@ -35,13 +35,13 @@ public class Login {
             public void actionPerformed(ActionEvent e) {
                 if (authenticate(userNameTextField.getText(), passwordTextField.getText(), user)) {
                     //login user
-                    jFrame.dispose();
+                    // jFrame.dispose();
                 }
                 else {
                     invalidLogin.setVisible(true);
+                    // jFrame.dispose();
                     // Open the New User Sign up frame
                     // nus.init();
-                    System.out.println();
                     // Close the current log in frame
                     // jFrame.dispose();
                 }
@@ -56,6 +56,7 @@ public class Login {
             public void actionPerformed(ActionEvent e) {
                 //goto user signup screen
                 
+                fm.runNewUserSignup();
                 jFrame.dispose();
             }
         });
@@ -64,7 +65,6 @@ public class Login {
         jFrame.setSize(1080, 720);
         jFrame.setLayout(null);
         jFrame.setVisible(true);
-        return user;
     }
 
     private boolean authenticate(String username, String password, User user) {

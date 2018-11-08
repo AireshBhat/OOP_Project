@@ -44,6 +44,7 @@ public class NewUserSignup {
 
         JButton login = new JButton("SUBMIT");
         login.setBounds(500, 300, 100, 40);
+        jFrame.add(login);
         login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -72,7 +73,6 @@ public class NewUserSignup {
                 }
             }
         });
-        jFrame.add(login);
 
         jFrame.setSize(1080, 720);
         jFrame.setLayout(null);

@@ -1,7 +1,12 @@
 package oops.project;
 
 public class FrameControl {
-  public user runLoginScreen() {
-    Login lg = new Login;
+  public void runLoginScreen(User user) {
+    Login lg = new Login();
+    lg.init(user);
+  }
+  public void runNewUserSignup() {
+    NewUserSignup nus = new NewUserSignup();
+    nus.init();
   }
 }
