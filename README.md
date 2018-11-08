@@ -17,6 +17,11 @@
 * Contains a User Class
 * Is used for creating a user while the application lasts
 
+## FileControl.java
+* Contains FileControl Class
+* This class is used to switch between frames.
+* Contains methods which called can open up a specific frame.
+
 ## Login.java
 
 ## NewUserSignUp.java
