@@ -29,8 +29,8 @@
 
 * Download and Install [Gradle][1]
 * From the root folder run the following commands
-    gradle build
-    gradle run
+    1.`gradle build`
+    2.`gradle run`
     
     
 [1]: https://gradle.org/install/
