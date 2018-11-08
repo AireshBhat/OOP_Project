@@ -5,8 +5,8 @@ public class FrameControl {
     Login lg = new Login();
     lg.init(user);
   }
-  public void runNewUserSignup() {
+  public void runNewUserSignup(User user) {
     NewUserSignup nus = new NewUserSignup();
-    nus.init();
+    nus.init(user);
   }
 }

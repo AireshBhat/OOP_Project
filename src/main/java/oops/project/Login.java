@@ -56,7 +56,9 @@ public class Login {
             public void actionPerformed(ActionEvent e) {
                 //goto user signup screen
                 
-                fm.runNewUserSignup();
+                // Open up the signup user frame.
+                fm.runNewUserSignup(user);
+                // Close the current frame.
                 jFrame.dispose();
             }
         });
