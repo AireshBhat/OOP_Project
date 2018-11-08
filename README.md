@@ -11,7 +11,7 @@
 
 ---
 
-# Files in the Project Folder **project**
+# Files in the Project Folder **./project**
 
 ## User.java
 * Contains a User Class
