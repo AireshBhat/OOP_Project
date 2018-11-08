@@ -9,6 +9,8 @@
 * The user is then taken to a screen asking them for the details of stay
 * ...to be continued
 
+---
+
 ## User.java
 * Contains a User Class
 * Is used for creating a user while the application lasts
@@ -18,3 +20,12 @@
 ## NewUserSignUp.java
 
 ## Main.java
+
+---
+
+## How to compile
+
+* Download and Install [Gradle]https://gradle.org/install/
+* From the root folder run the following commands
+    gradle build
+    gradle run
