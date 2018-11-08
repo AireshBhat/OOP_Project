@@ -11,6 +11,8 @@
 
 ---
 
+# Files in the Project Folder **project**
+
 ## User.java
 * Contains a User Class
 * Is used for creating a user while the application lasts
@@ -25,7 +27,10 @@
 
 ## How to compile
 
-* Download and Install [Gradle]https://gradle.org/install/
+* Download and Install [Gradle][1]
 * From the root folder run the following commands
     gradle build
     gradle run
+    
+    
+[1]: https://gradle.org/install/
