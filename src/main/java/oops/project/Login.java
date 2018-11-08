@@ -9,8 +9,9 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Login {
-
-    protected void init() {
+    // Create an object from user class
+    User user = new User();
+    protected User init() {
         JFrame jFrame = new JFrame();
 
         JTextField userNameTextField = new JTextField("Username");
@@ -33,9 +34,15 @@ public class Login {
             public void actionPerformed(ActionEvent e) {
                 if (authenticate(userNameTextField.getText(), passwordTextField.getText())) {
                     //login user
+                    jFrame.dispose();
                 }
                 else {
                     invalidLogin.setVisible(true);
+                    // Open the New User Sign up frame
+                    nus.init();
+                    System.out.println();
+                    // Close the current log in frame
+                    jFrame.dispose();
                 }
             }
         });
@@ -47,6 +54,8 @@ public class Login {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //goto user signup screen
+                
+                jFrame.dispose();
             }
         });
         jFrame.add(newUser);

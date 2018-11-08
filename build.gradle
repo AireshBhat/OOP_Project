@@ -2,6 +2,12 @@ plugins {
     id 'java'
 }
 
+apply plugin: 'java'
+
+apply plugin: 'application'
+
+mainClassName = 'oops.project.Main'
+
 group 'OOPS'
 version '1.0.0'
 

@@ -62,6 +62,10 @@ public class NewUserSignup {
             }
         });
         jFrame.add(login);
+
+        jFrame.setSize(1080, 720);
+        jFrame.setLayout(null);
+        jFrame.setVisible(true);
     }
 
     private int validate(String userId, String birthDate) {
