@@ -10,9 +10,10 @@ import java.io.IOException;
 
 public class Login {
     // Create an object from user class
-    User user = new User();
+    User user;
     protected User init() {
         JFrame jFrame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         JTextField userNameTextField = new JTextField("Username");
         userNameTextField.setBounds(500, 100, 100, 40);
@@ -32,17 +33,17 @@ public class Login {
         login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (authenticate(userNameTextField.getText(), passwordTextField.getText())) {
+                if (authenticate(userNameTextField.getText(), passwordTextField.getText(), user)) {
                     //login user
                     jFrame.dispose();
                 }
                 else {
                     invalidLogin.setVisible(true);
                     // Open the New User Sign up frame
-                    nus.init();
+                    // nus.init();
                     System.out.println();
                     // Close the current log in frame
-                    jFrame.dispose();
+                    // jFrame.dispose();
                 }
             }
         });
@@ -63,15 +64,17 @@ public class Login {
         jFrame.setSize(1080, 720);
         jFrame.setLayout(null);
         jFrame.setVisible(true);
+        return user;
     }
 
-    private boolean authenticate(String username, String password) {
+    private boolean authenticate(String username, String password, User user) {
         try {
             FileReader fileReader = new FileReader(NewUserSignup.FILE);
             CSVReader csvReader = new CSVReader(fileReader);
             String[] record;
             while ((record = csvReader.readNext()) != null) {
                 if (record[0].equals(username) && record[3].equals(password)) {
+                    user = new User(record[0], record[1], record[2], record[3], record[4]);
                     return true;
                 }
             }

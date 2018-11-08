@@ -9,7 +9,7 @@ public class User {
     private String address;
     private String userName;
     private String password;
-    User(name, birthday, address, userName, password) {
+    User(String userName, String name, String birthday, String password, String address) {
       name = name;
       birthday = birthday;
       address = address;
@@ -21,15 +21,15 @@ public class User {
         name = n;
     };
     // Function to get the name of the user
-    public String getName {
+    public String getName() {
       return name;
     };
     // Function to set the name of the user
     public void setBirthday (String b) {
-        birthDate = b;
+        birthday = b;
     };
     // Function to get the name of the user
-    public String getName {
+    public String getBirthday() {
       return birthday;
     };
     // Function to set the name of the user
@@ -37,7 +37,7 @@ public class User {
         address = ad;
     };
     // Function to get the name of the user
-    public String getAddress {
+    public String getAddress() {
       return address;
     };
     // Function to set the name of the user
@@ -45,7 +45,7 @@ public class User {
         userName = un;
     };
     // Function to get the name of the user
-    public String getUserName {
+    public String getUserName() {
       return userName;
     };
     // Function to set the name of the user
@@ -53,7 +53,7 @@ public class User {
         password = p;
     };
     // Function to get the name of the user
-    public String getPassword {
+    public String getPassword() {
       return password;
     };
 }
