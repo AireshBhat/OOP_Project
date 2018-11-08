@@ -1,11 +1,13 @@
 package oops.project;
 
 import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class NewUserSignup {
@@ -48,6 +50,15 @@ public class NewUserSignup {
                 int x = validate(userNameTextField.getText(), birthDateTextField.getText());
                 switch (x) {
                     case 1:
+                        try {
+                            FileWriter fileWriter = new FileWriter(FILE);
+                            CSVWriter csvWriter = new CSVWriter(fileWriter);
+                            String[] data = {userNameTextField.getText(), nameTextField.getText(), birthDateTextField.getText(), passwordTextField.getText(), addressTextField.getText()};
+                            csvWriter.writeNext(data);
+                            csvWriter.close();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
                         //login user
                         break;
                     case -1:
