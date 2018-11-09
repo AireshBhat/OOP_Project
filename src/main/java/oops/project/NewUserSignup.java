@@ -14,7 +14,8 @@ public class NewUserSignup {
 
     protected static final String FILE = "./users.csv";
 
-    protected void init() {
+    protected void init(User user) {
+        FrameControl fc = new FrameControl();
         JFrame jFrame = new JFrame();
 
         JTextField nameTextField = new JTextField("Name");
@@ -42,9 +43,10 @@ public class NewUserSignup {
         invalidLogin.setVisible(false);
         jFrame.add(invalidLogin);
 
-        JButton login = new JButton("SUBMIT");
-        login.setBounds(500, 300, 100, 40);
-        login.addActionListener(new ActionListener() {
+        JButton loginButton = new JButton("SUBMIT");
+        loginButton.setBounds(500, 400, 100, 40);
+        jFrame.add(loginButton);
+        loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int x = validate(userNameTextField.getText(), birthDateTextField.getText());
@@ -59,6 +61,8 @@ public class NewUserSignup {
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
+                        fc.runLoginScreen(user);
+                        jFrame.dispose();
                         //login user
                         break;
                     case -1:
@@ -72,7 +76,10 @@ public class NewUserSignup {
                 }
             }
         });
-        jFrame.add(login);
+
+        jFrame.setSize(1080, 720);
+        jFrame.setLayout(null);
+        jFrame.setVisible(true);
     }
 
     private int validate(String userId, String birthDate) {

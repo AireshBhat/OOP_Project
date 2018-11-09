@@ -9,9 +9,11 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Login {
-
-    protected void init() {
+    // Create an object from user class
+    FrameControl fm = new FrameControl();
+    protected void init(User user) {
         JFrame jFrame = new JFrame();
+        jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         JTextField userNameTextField = new JTextField("Username");
         userNameTextField.setBounds(500, 100, 100, 40);
@@ -31,11 +33,17 @@ public class Login {
         login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (authenticate(userNameTextField.getText(), passwordTextField.getText())) {
+                if (authenticate(userNameTextField.getText(), passwordTextField.getText(), user)) {
                     //login user
+                    // jFrame.dispose();
                 }
                 else {
                     invalidLogin.setVisible(true);
+                    // jFrame.dispose();
+                    // Open the New User Sign up frame
+                    // nus.init();
+                    // Close the current log in frame
+                    // jFrame.dispose();
                 }
             }
         });
@@ -47,6 +55,11 @@ public class Login {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //goto user signup screen
+                
+                // Open up the signup user frame.
+                fm.runNewUserSignup(user);
+                // Close the current frame.
+                jFrame.dispose();
             }
         });
         jFrame.add(newUser);
@@ -56,13 +69,14 @@ public class Login {
         jFrame.setVisible(true);
     }
 
-    private boolean authenticate(String username, String password) {
+    private boolean authenticate(String username, String password, User user) {
         try {
             FileReader fileReader = new FileReader(NewUserSignup.FILE);
             CSVReader csvReader = new CSVReader(fileReader);
             String[] record;
             while ((record = csvReader.readNext()) != null) {
                 if (record[0].equals(username) && record[3].equals(password)) {
+                    user = new User(record[0], record[1], record[2], record[3], record[4]);
                     return true;
                 }
             }
