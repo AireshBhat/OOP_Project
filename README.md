@@ -23,8 +23,12 @@
 * Contains methods which called can open up a specific frame.
 
 ## Login.java
+* Initiates login flow.
+* Validates the username and password from "users.csv".
 
 ## NewUserSignUp.java
+* New user addition is implemented here.
+* Checks if the username is taken and if the given birthdate is valid (roughly).
 
 ## Main.java
 
