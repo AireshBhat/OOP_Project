@@ -33,9 +33,11 @@ public class Login {
         login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (authenticate(userNameTextField.getText(), passwordTextField.getText(), user)) {
+                String username = authenticate(userNameTextField.getText(), passwordTextField.getText());
+                if (!username.equals("Invalid User")) {
                     //login user
-                    // jFrame.dispose();
+                    fm.runHotelStayDetailsFrame(username);
+                    jFrame.dispose();
                 }
                 else {
                     invalidLogin.setVisible(true);
@@ -69,20 +71,20 @@ public class Login {
         jFrame.setVisible(true);
     }
 
-    private boolean authenticate(String username, String password, User user) {
+    private String authenticate(String username, String password) {
         try {
             FileReader fileReader = new FileReader(NewUserSignup.FILE);
             CSVReader csvReader = new CSVReader(fileReader);
             String[] record;
             while ((record = csvReader.readNext()) != null) {
                 if (record[0].equals(username) && record[3].equals(password)) {
-                    user = new User(record[0], record[1], record[2], record[3], record[4]);
-                    return true;
+                    User user = new User(record[0], record[1], record[2], record[3], record[4]);
+                    return record[0];
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
+        return "Invalid User";
     }
 }
