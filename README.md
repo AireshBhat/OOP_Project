@@ -2,7 +2,9 @@
 
 ## Flow of the Project
 
-* The program starts with the login frame.
+* The program starts with the main class
+* The main class instantiates an object of the fileControl class and then uses the openLoginScreen function to open the login frame.
+* The program then moves to the login frame
 * The user then either logs in or sign's up.
   * On Signup, information of the user is taken and stored in a file and then rerouted to login.
   * On login the user is taken to the next screen.
@@ -31,7 +33,8 @@
 * Checks if the username is taken and if the given birthdate is valid (roughly).
 
 ## Main.java
-
+* Creates an object of the FileControl Class
+* Calls the login screen function to open the login frame
 ---
 
 ## How to compile
