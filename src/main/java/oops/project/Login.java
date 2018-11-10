@@ -11,7 +11,7 @@ import java.io.IOException;
 public class Login {
     // Create an object from user class
     FrameControl fm = new FrameControl();
-    protected void init(User user) {
+    protected void init() {
         JFrame jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
@@ -33,10 +33,9 @@ public class Login {
         login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String username = authenticate(userNameTextField.getText(), passwordTextField.getText());
-                if (!username.equals("Invalid User")) {
+                if (authenticate(userNameTextField.getText(), passwordTextField.getText())) {
                     //login user
-                    fm.runHotelStayDetailsFrame(username);
+                    fm.runHotelStayDetailsFrame();
                     jFrame.dispose();
                 }
                 else {
@@ -59,7 +58,7 @@ public class Login {
                 //goto user signup screen
                 
                 // Open up the signup user frame.
-                fm.runNewUserSignup(user);
+                fm.runNewUserSignup();
                 // Close the current frame.
                 jFrame.dispose();
             }
@@ -71,7 +70,7 @@ public class Login {
         jFrame.setVisible(true);
     }
 
-    private String authenticate(String username, String password) {
+    private boolean authenticate(String username, String password) {
         try {
             FileReader fileReader = new FileReader(NewUserSignup.FILE);
             CSVReader csvReader = new CSVReader(fileReader);
@@ -79,12 +78,19 @@ public class Login {
             while ((record = csvReader.readNext()) != null) {
                 if (record[0].equals(username) && record[3].equals(password)) {
                     User user = new User(record[0], record[1], record[2], record[3], record[4]);
-                    return record[0];
+                    return true;
                 }
             }
+            csvReader.close();
+            fileReader.close();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+          // try {
+          // } catch (IOException ee) {
+            // ee.printStackTrace();
+          // }
         }
-        return "Invalid User";
+        return false;
     }
 }

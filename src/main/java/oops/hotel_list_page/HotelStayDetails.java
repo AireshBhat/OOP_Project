@@ -13,12 +13,14 @@ import java.io.IOException;
 // Class that implements the design of the frame that asks the user
 // the duration of stay, no of hotels and so on
 public class HotelStayDetails extends JFrame implements ActionListener {
-  String name;
+  protected static final String FILE = "./src/main/java/static_files/users.csv";
+  // Instantiate an object of the logic class for this class
+  HotelStayDetailsLogic hotelLogic = new HotelStayDetailsLogic();
 
   JTextField hOut, hIn, noRooms, noPpl;
   JLabel hOutLabel, hInLabel, noRoomsLabel, noPplLabel, userLabel;
   JButton submitButton;
-  public HotelStayDetails(String username) {
+  public HotelStayDetails() {
     User user = new User();
     
     // Add the Label depicting the name of the user
@@ -64,7 +66,12 @@ public class HotelStayDetails extends JFrame implements ActionListener {
 
     submitButton = new JButton("Submit");
     submitButton.setBounds(500, 300, 100, 40);
-    submitButton.addActionListener(this);
+    submitButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+
+      }
+    });
     add(submitButton);
     setSize(1080, 720);
     setLayout(null);
