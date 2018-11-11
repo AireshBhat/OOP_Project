@@ -11,6 +11,9 @@ public class User {
     static private String password;
     static private String checkInDate;
     static private String checkOutDate;
+    static private String location;
+    static private String room;
+    static private String ppl;
     public User() {
     }
     public User(String userName, String name, String birthday, String password, String address) {
@@ -63,13 +66,45 @@ public class User {
     public String getPassword() {
       return this.password;
     };
-    // Function to set the name of the user
+    // Function to set the check In Date
     public void setCheckInDate (String checkInDate) {
         this.checkInDate = checkInDate;
     };
-    // Function to get the name of the user
+    // Function to get the check In Date
     public String getCheckInDate() {
         return this.checkInDate;
+    };
+    // Function to set the check Out Date
+    public void setCheckOutDate (String checkOutDate) {
+        this.checkOutDate = checkOutDate;
+    };
+    // Function to get the check Out Date
+    public String getCheckOutDate() {
+        return this.checkOutDate;
+    };
+    // Function to set the location
+    public void setLocation (String location) {
+        this.location = location;
+    };
+    // Function to get the location
+    public String getLocation() {
+        return this.location;
+    };
+    // Function to set the number of rooms
+    public void setRoom (String room) {
+        this.room = room;
+    };
+    // Function to get the number of rooms
+    public String getRoom() {
+        return this.room;
+    };
+    // Function to set the number of ppl
+    public void setPpl (String ppl) {
+        this.ppl = ppl;
+    };
+    // Function to get the number of ppl
+    public String getPpl() {
+        return this.ppl;
     };
 }
 
