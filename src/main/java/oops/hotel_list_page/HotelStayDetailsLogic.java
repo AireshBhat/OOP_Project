@@ -68,21 +68,8 @@ public class HotelStayDetailsLogic {
       int counter = 0;
       int sizeOfRow;
       while ((recordReaderEach = csr.readNext()) != null) {
-        sizeOfRow = recordReaderEach.length;
-        recordReaderWhole.add(new String[] {
-          recordReaderEach[0],
-          recordReaderEach[1],
-          recordReaderEach[2],
-          recordReaderEach[3],
-          recordReaderEach[4],
-          5 < sizeOfRow - 1 ? recordReaderEach[5] : "",
-          6 < sizeOfRow - 1 ? recordReaderEach[6] : "",
-          7 < sizeOfRow - 1 ? recordReaderEach[7] : "",
-          8 < sizeOfRow - 1 ? recordReaderEach[8] : "",
-          9 < sizeOfRow - 1 ? recordReaderEach[9] : "",
-        });
-        if (recordReaderEach[0] == user.getUserName()) {
-        } else {
+        recordReaderWhole.add(recordReaderEach);
+        if (recordReaderEach[0].equals(user.getUserName())) {
           locationOfUserInFile = counter;
         }
         counter++;
