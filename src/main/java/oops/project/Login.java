@@ -75,9 +75,22 @@ public class Login {
             FileReader fileReader = new FileReader(NewUserSignup.FILE);
             CSVReader csvReader = new CSVReader(fileReader);
             String[] record;
+            int recordLength = 0;
             while ((record = csvReader.readNext()) != null) {
+              recordLength = record.length;
                 if (record[0].equals(username) && record[3].equals(password)) {
-                    User user = new User(record[0], record[1], record[2], record[3], record[4]);
+                    User user = new User(
+                        record[0],
+                        record[1],
+                        record[2],
+                        record[3],
+                        record[4],
+                        5 < recordLength ? record[5] : "",
+                        6 < recordLength ? record[6] : "",
+                        7 < recordLength ? record[7] : "",
+                        8 < recordLength ? record[8] : "",
+                        9 < recordLength ? record[9] : ""
+                        );
                     return true;
                 }
             }

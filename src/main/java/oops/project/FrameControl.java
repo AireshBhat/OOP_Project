@@ -14,4 +14,7 @@ public class FrameControl {
   public void runHotelStayDetailsFrame() {
     HotelStayDetails hsd = new HotelStayDetails();
   }
+  public void runHotelListFrame() {
+    HotelList hl = new HotelList();
+  }
 }

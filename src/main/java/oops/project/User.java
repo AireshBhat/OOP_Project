@@ -16,14 +16,17 @@ public class User {
     static private String ppl;
     public User() {
     }
-    public User(String userName, String name, String birthday, String password, String address) {
+    public User(String userName, String name, String birthday, String password, String address, String checkIn, String checkOut, String room, String ppl, String location) {
       this.name = name;
       this.birthday = birthday;
       this.address = address;
       this.userName = userName;
       this.password = password;
-      this.checkInDate = "";
-      this.checkOutDate = "";
+      this.checkInDate = checkIn;
+      this.checkOutDate = checkOut;
+      this.location = location;
+      this.room = room;
+      this.ppl = ppl;
     }
     // Function to set the name of the user
     public void setName (String n) {

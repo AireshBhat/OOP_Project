@@ -16,6 +16,7 @@ public class HotelStayDetails extends JFrame implements ActionListener {
   protected static final String FILE = "./src/main/java/static_files/users.csv";
   // Instantiate an object of the logic class for this class
   HotelStayDetailsLogic hotelLogic = new HotelStayDetailsLogic();
+  FrameControl fm = new FrameControl();
 
   JTextField hOut, hIn, noRooms, noPpl, location;
   JLabel hOutLabel, hInLabel, noRoomsLabel, noPplLabel, userLabel, locationLabel;
@@ -93,6 +94,8 @@ public class HotelStayDetails extends JFrame implements ActionListener {
           invalidDate.setVisible(true);
         } else {
           hotelLogic.addData(location.getText(), hIn.getText(), hOut.getText(), noRooms.getText(), noPpl.getText());
+          fm.runHotelListFrame();
+          dispose();
         }
       }
     });
