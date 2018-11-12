@@ -47,7 +47,7 @@ public class HotelStayDetailsLogic {
     }
     return 1;
   }
-  
+
   // Add the data to the csv
   // We first read all the data from the csv
   // Then remove the row of the user who has inputted the data

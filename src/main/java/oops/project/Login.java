@@ -56,7 +56,7 @@ public class Login {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //goto user signup screen
-                
+
                 // Open up the signup user frame.
                 fm.runNewUserSignup();
                 // Close the current frame.
@@ -85,11 +85,11 @@ public class Login {
                         record[2],
                         record[3],
                         record[4],
-                        5 < recordLength ? record[5] : "",
-                        6 < recordLength ? record[6] : "",
-                        7 < recordLength ? record[7] : "",
-                        8 < recordLength ? record[8] : "",
-                        9 < recordLength ? record[9] : ""
+                        record[5],
+                        record[6],
+                        record[7],
+                        record[8],
+                        record[9]
                         );
                     return true;
                 }

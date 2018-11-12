@@ -29,7 +29,8 @@ public class HotelListLogic {
     boolean contains = false;
     try {
       CSVReader csr = new CSVReader(new FileReader(HotelList.HOTEL_FILE));
-      CSVWriter csw = new CSVWriter(new FileWriter("./src/main/java/static_files/checkHotelList.csv", false));
+      FileWriter fw = new FileWriter("./src/main/java/static_files/checkHotelList.csv", false);
+      CSVWriter csw = new CSVWriter(fw);
       String[] recordReaderEach;
       int addressLength = 0;
       int innerAddressLength = 0;
@@ -52,6 +53,7 @@ public class HotelListLogic {
       }
       csw.writeAll(listOfHotels);
       csw.close();
+      fw.close();
       csr.close();
     } catch (IOException ee) {
       ee.printStackTrace();

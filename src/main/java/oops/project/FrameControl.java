@@ -11,10 +11,17 @@ public class FrameControl {
     NewUserSignup nus = new NewUserSignup();
     nus.init();
   }
+  HotelStayDetails hsd;
   public void runHotelStayDetailsFrame() {
-    HotelStayDetails hsd = new HotelStayDetails();
+    hsd = new HotelStayDetails();
   }
+  // HotelListFrame hlf;
+  // public void runHotelListFrame() {
+    // hlf = new HotelListFrame();
+    // hlf.init();
+  // }
+  HotelList hl;
   public void runHotelListFrame() {
-    HotelList hl = new HotelList();
+    hl = new HotelList();
   }
 }
