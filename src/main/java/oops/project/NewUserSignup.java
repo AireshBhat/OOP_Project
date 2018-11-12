@@ -111,8 +111,8 @@ public class NewUserSignup {
         }
 
         try {
-            int day = Integer.parseInt(birthDate.substring(0, 1));
-            int month = Integer.parseInt(birthDate.substring(3, 4));
+            int day = Integer.parseInt(birthDate.substring(0, 2));
+            int month = Integer.parseInt(birthDate.substring(3, 5));
             if (day > 31 || month > 12 || day < 1 || month < 1) {
                 return -2;
             }
