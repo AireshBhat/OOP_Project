@@ -11,7 +11,7 @@ import java.io.IOException;
 public class Login {
     // Create an object from user class
     FrameControl fm = new FrameControl();
-    protected void init(User user) {
+    protected void init() {
         JFrame jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
@@ -33,9 +33,10 @@ public class Login {
         login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (authenticate(userNameTextField.getText(), passwordTextField.getText(), user)) {
+                if (authenticate(userNameTextField.getText(), passwordTextField.getText())) {
                     //login user
-                    // jFrame.dispose();
+                    fm.runHotelStayDetailsFrame();
+                    jFrame.dispose();
                 }
                 else {
                     invalidLogin.setVisible(true);
@@ -55,9 +56,9 @@ public class Login {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //goto user signup screen
-                
+
                 // Open up the signup user frame.
-                fm.runNewUserSignup(user);
+                fm.runNewUserSignup();
                 // Close the current frame.
                 jFrame.dispose();
             }
@@ -69,19 +70,39 @@ public class Login {
         jFrame.setVisible(true);
     }
 
-    private boolean authenticate(String username, String password, User user) {
+    private boolean authenticate(String username, String password) {
         try {
             FileReader fileReader = new FileReader(NewUserSignup.FILE);
             CSVReader csvReader = new CSVReader(fileReader);
             String[] record;
+            int recordLength = 0;
             while ((record = csvReader.readNext()) != null) {
+              recordLength = record.length;
                 if (record[0].equals(username) && record[3].equals(password)) {
-                    user = new User(record[0], record[1], record[2], record[3], record[4]);
+                    User user = new User(
+                        record[0],
+                        record[1],
+                        record[2],
+                        record[3],
+                        record[4],
+                        record[5],
+                        record[6],
+                        record[7],
+                        record[8],
+                        record[9]
+                        );
                     return true;
                 }
             }
+            csvReader.close();
+            fileReader.close();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+          // try {
+          // } catch (IOException ee) {
+            // ee.printStackTrace();
+          // }
         }
         return false;
     }

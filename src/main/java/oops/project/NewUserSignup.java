@@ -12,9 +12,9 @@ import java.io.IOException;
 
 public class NewUserSignup {
 
-    protected static final String FILE = "./users.csv";
+    protected static final String FILE = "./src/main/java/static_files/users.csv";
 
-    protected void init(User user) {
+    protected void init() {
         FrameControl fc = new FrameControl();
         JFrame jFrame = new JFrame();
 
@@ -53,15 +53,27 @@ public class NewUserSignup {
                 switch (x) {
                     case 1:
                         try {
-                            FileWriter fileWriter = new FileWriter(FILE);
+                            FileWriter fileWriter = new FileWriter(FILE, true);
                             CSVWriter csvWriter = new CSVWriter(fileWriter);
-                            String[] data = {userNameTextField.getText(), nameTextField.getText(), birthDateTextField.getText(), passwordTextField.getText(), addressTextField.getText()};
+                            String[] data = {
+                              userNameTextField.getText(),
+                              nameTextField.getText(),
+                              birthDateTextField.getText(),
+                              passwordTextField.getText(),
+                              addressTextField.getText(),
+                              "",
+                              "",
+                              "",
+                              "",
+                              "",
+                            };
                             csvWriter.writeNext(data);
                             csvWriter.close();
+                            fileWriter.close();
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
-                        fc.runLoginScreen(user);
+                        fc.runLoginScreen();
                         jFrame.dispose();
                         //login user
                         break;
@@ -92,6 +104,8 @@ public class NewUserSignup {
                     return -1;
                 }
             }
+          csvReader.close();
+          fileReader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
