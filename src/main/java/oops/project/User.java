@@ -14,17 +14,18 @@ public class User {
     static private String location;
     static private String room;
     static private String ppl;
+    // Uncomment these following lines when directly opening a frame from main.java
     public User() {
-      this.name = "Airesh Bhat";
-      this.birthday = "27/12/1997";
-      this.address = "abad,adfad,dva";
-      this.userName = "Airesh9";
-      this.password = "h";
-      this.checkInDate = "22/2/2222";
-      this.checkOutDate = "22/3/2222";
-      this.location = "Udaipur";
-      this.room = "1";
-      this.ppl = "2";
+      // this.name = "Airesh Bhat";
+      // this.birthday = "27/12/1997";
+      // this.address = "abad,adfad,dva";
+      // this.userName = "Airesh9";
+      // this.password = "h";
+      // this.checkInDate = "22/2/2222";
+      // this.checkOutDate = "22/3/2222";
+      // this.location = "Udaipur";
+      // this.room = "1";
+      // this.ppl = "2";
     }
     public User(String userName, String name, String birthday, String password, String address, String checkIn, String checkOut, String room, String ppl, String location) {
       this.name = name;
