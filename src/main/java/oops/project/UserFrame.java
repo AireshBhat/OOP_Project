@@ -112,15 +112,15 @@ public class UserFrame {
       hBookingReference[i] = new JLabel("Booking Reference: " + hBookRef);
       changeDate[i] = new JButton("Change Date");
       cancel[i] = new JButton("Cancel Booking");
-      hotelName[i].setBounds(block * 4, startingHeight + (heightBlock * i) + block, 300, block * 2);
-      hotelAccom[i].setBounds(block * 26, startingHeight + (heightBlock * i) + block, 200, block * 2);
-      hotelAddress[i].setBounds(block * 4, startingHeight + (heightBlock * i) + block * 4, 300, block * 2);
-      hotelPpl[i].setBounds(block * 26, startingHeight + (heightBlock * i) + block * 4, 200, block * 2);
-      hCheckInDate[i].setBounds(block * 4, startingHeight + (heightBlock * i) + block * 6, 200, block * 2);
-      hCheckOutDate[i].setBounds(block * 26, startingHeight + (heightBlock * i) + block * 6, 200, block * 2);
-      hBookingReference[i].setBounds(block * 14, startingHeight + (heightBlock * i) + block * 8, 200, block * 2);
-      changeDate[i].setBounds(block * 4, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
-      cancel[i].setBounds(block * 26, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
+      hotelName[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block, 300, block * 2);
+      hotelAccom[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block, 200, block * 2);
+      hotelAddress[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 4, 300, block * 2);
+      hotelPpl[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 4, 200, block * 2);
+      hCheckInDate[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 6, 200, block * 2);
+      hCheckOutDate[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 6, 200, block * 2);
+      hBookingReference[i].setBounds(block * 33, startingHeight + (heightBlock * i) + block * 8, 200, block * 2);
+      changeDate[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
+      cancel[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
       String finalHBookRef = hBookRef;
       cancel[i].addActionListener(new ActionListener() {
         @Override
@@ -130,7 +130,7 @@ public class UserFrame {
           Date date1, date2;
           try {
             date1 = simpleDateFormat.parse(date);
-            date2 = simpleDateFormat.parse();               //TODO: Pass booking date here.
+            date2 = simpleDateFormat.parse("22/2/2222");               //TODO: Pass booking date here.
             if (TimeUnit.DAYS.convert(date1.getTime() - date2.getTime(), TimeUnit.MILLISECONDS) > 3) {
               //TODO: Return method after telling user if more than 3 days
             }
@@ -159,9 +159,17 @@ public class UserFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
           JDialog jDialog = new JDialog(jFrame, "Enter new dates");
-          JTextField inDateTextField = new JTextField("In Date: DD/MM/YYYY");
-          JTextField outDateTextField = new JTextField("Out Date: DD/MM/YYYY");
+          jDialog.setLayout(null);
+          JTextField inDateTextField = new JTextField("DD/MM/YYYY");
+          inDateTextField.setBounds(200, 10, 170, 30);
+          JLabel dCheckInDate = new JLabel("Check In Date:");
+          dCheckInDate.setBounds(50, 10, 170, 30);
+          JTextField outDateTextField = new JTextField("DD/MM/YYYY");
+          outDateTextField.setBounds(200, 70, 170, 30);
+          JLabel dCheckOutDate = new JLabel("Check Out Date:");
+          dCheckOutDate.setBounds(50, 70, 170, 30);
           JButton submitButton = new JButton("SUBMIT");
+          submitButton.setBounds(120, 120, 125, 50);
           submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -204,8 +212,10 @@ public class UserFrame {
           });
           jDialog.add(inDateTextField);
           jDialog.add(outDateTextField);
+          jDialog.add(dCheckInDate);
+          jDialog.add(dCheckOutDate);
           jDialog.add(submitButton);
-          jDialog.setSize(250, 250);
+          jDialog.setSize(400, 220);
           jDialog.setVisible(true);
         }
       });
