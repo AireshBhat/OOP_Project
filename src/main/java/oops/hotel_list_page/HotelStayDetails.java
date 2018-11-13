@@ -20,68 +20,80 @@ public class HotelStayDetails {
 
   JTextField hOut, hIn, noRooms, noPpl, location;
   JLabel hOutLabel, hInLabel, noRoomsLabel, noPplLabel, userLabel, locationLabel;
-  JButton submitButton;
+  JButton submitButton, userPage;
   JTextArea invalidDate;
   public HotelStayDetails() {
     User user = new User();
 
     // Add the Label depicting the name of the user
     String curUserName = user.getName();
-    userLabel = new JLabel("Name: " + curUserName);
+    userLabel = new JLabel(curUserName);
     userLabel.setBounds(500, 20, 150, 40);
     f.add(userLabel);
+
+    userPage = new JButton("Profile");
+    userPage.setBounds(800, 20, 150, 40);
+    userPage.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        fm.runUserFrame();
+        f.dispose();
+      }
+    });
+    f.add(userPage);
+
     // add the label for the check in date text box
     hInLabel = new JLabel("Check In Date");
-    hInLabel.setBounds(300, 100, 150, 40);
+    hInLabel.setBounds(300, 150, 150, 40);
     f.add(hInLabel);
     // add the check in date text box
     hIn = new JTextField("DD/MM/YYYY");
-    hIn.setBounds(500, 100, 150, 40);
+    hIn.setBounds(500, 150, 150, 40);
     f.add(hIn);
 
     // add the label for the check in date text box
     locationLabel = new JLabel("Location");
-    locationLabel.setBounds(300, 50, 150, 40);
+    locationLabel.setBounds(300, 100, 150, 40);
     f.add(locationLabel);
     // add the check in date text box
     location = new JTextField("DD/MM/YYYY");
-    location.setBounds(500, 50, 150, 40);
+    location.setBounds(500, 100, 150, 40);
     f.add(location);
 
     // add the label for the check out date text box
     hOutLabel = new JLabel("Check Out Date");
-    hOutLabel.setBounds(300, 150, 150, 40);
+    hOutLabel.setBounds(300, 200, 150, 40);
     f.add(hOutLabel);
     // add the check out date text box
     hOut = new JTextField("DD/MM/YYYY");
-    hOut.setBounds(500, 150, 150, 40);
+    hOut.setBounds(500, 200, 150, 40);
     f.add(hOut);
 
     // add the label for the number of rooom
     noRoomsLabel = new JLabel("Number Of Rooms");
-    noRoomsLabel.setBounds(300, 200, 150, 40);
+    noRoomsLabel.setBounds(300, 250, 150, 40);
     f.add(noRoomsLabel);
     // add the number of rooms text box
     noRooms = new JTextField("Number of Rooms");
-    noRooms.setBounds(500, 200, 150, 40);
+    noRooms.setBounds(500, 250, 150, 40);
     f.add(noRooms);
 
     // add the label for the number of rooom
     noPplLabel = new JLabel("Number of People");
-    noPplLabel.setBounds(300, 250, 150, 40);
+    noPplLabel.setBounds(300, 300, 150, 40);
     f.add(noPplLabel);
     // add the number of people texr box
     noPpl = new JTextField("Number of People");
-    noPpl.setBounds(500, 250, 150, 40);
+    noPpl.setBounds(500, 300, 150, 40);
     f.add(noPpl);
 
     invalidDate = new JTextArea();
-    invalidDate.setBounds(500,350, 150, 40);
+    invalidDate.setBounds(500,400, 150, 40);
     invalidDate.setVisible(false);
     f.add(invalidDate);
 
     submitButton = new JButton("Submit");
-    submitButton.setBounds(500, 300, 100, 40);
+    submitButton.setBounds(500, 350, 100, 40);
     submitButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {

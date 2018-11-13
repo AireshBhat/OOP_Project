@@ -41,7 +41,7 @@ public class UserFrame {
   private JButton[] cancel = new JButton[numberOfHotels];
 
   private void createJPanel() {
-    int startingHeight = 50;
+    int startingHeight = 170;
     int heightBlock = 300;
     int block = 15;
 
@@ -56,6 +56,33 @@ public class UserFrame {
     name.setBounds(500, 20, 150, 40);
     jp.add(name);
     jp.setLayout(null);
+
+    JLabel currentBookings = new JLabel("Current Bookings");
+    currentBookings.setBounds(block * 33, 120, 300, block * 2);
+    jp.add(currentBookings);
+
+    JButton newBooking = new JButton("Book Another Hotel");
+    newBooking.setBounds(block * 15, 80, 200, block * 2);
+    newBooking.addActionListener(new ActionListener() {
+      @Override
+        public void actionPerformed(ActionEvent e) {
+        fm.runHotelStayDetailsFrame();
+        jFrame.dispose();
+      }
+    });
+    jp.add(newBooking);
+
+    JButton logOut = new JButton("LogOut");
+    logOut.setBounds(block * 40, 80, 200, block * 2);
+    logOut.addActionListener(new ActionListener() {
+      @Override
+        public void actionPerformed(ActionEvent e) {
+        fm.runLoginScreen();
+        jFrame.dispose();
+      }
+    });
+
+    jp.add(logOut);
 
     String hName, hPrice, hAddress, hAccom, hPpl, checkIn, checkOut, hBookRef;
 
@@ -80,15 +107,15 @@ public class UserFrame {
       hBookingReference[i] = new JLabel("Booking Reference: " + hBookRef);
       changeDate[i] = new JButton("Change Date");
       cancel[i] = new JButton("Cancel Booking");
-      hotelName[i].setBounds(block * 4, startingHeight + (heightBlock * i) + block, 300, block * 2);
-      hotelAccom[i].setBounds(block * 26, startingHeight + (heightBlock * i) + block, 200, block * 2);
-      hotelAddress[i].setBounds(block * 4, startingHeight + (heightBlock * i) + block * 4, 300, block * 2);
-      hotelPpl[i].setBounds(block * 26, startingHeight + (heightBlock * i) + block * 4, 200, block * 2);
-      hCheckInDate[i].setBounds(block * 4, startingHeight + (heightBlock * i) + block * 6, 200, block * 2);
-      hCheckOutDate[i].setBounds(block * 26, startingHeight + (heightBlock * i) + block * 6, 200, block * 2);
-      hBookingReference[i].setBounds(block * 14, startingHeight + (heightBlock * i) + block * 8, 200, block * 2);
-      changeDate[i].setBounds(block * 4, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
-      cancel[i].setBounds(block * 26, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
+      hotelName[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block, 300, block * 2);
+      hotelAccom[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block, 200, block * 2);
+      hotelAddress[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 4, 300, block * 2);
+      hotelPpl[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 4, 200, block * 2);
+      hCheckInDate[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 6, 200, block * 2);
+      hCheckOutDate[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 6, 200, block * 2);
+      hBookingReference[i].setBounds(block * 33, startingHeight + (heightBlock * i) + block * 8, 200, block * 2);
+      changeDate[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
+      cancel[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
       // Add the functionality of the two buttons here
       // :TODO
       jp.add(hotelName[i]);
