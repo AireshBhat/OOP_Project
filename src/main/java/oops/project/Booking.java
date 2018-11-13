@@ -11,9 +11,11 @@ import java.util.Random;
 
 public class Booking {
 
-    private final String BOOKING = "./booking.csv";
+    private final String BOOKING = "./src/main/java/static_files/booking.csv";
 
-    protected void init(String hName, String hPrice, String hAddress, String hAccom, String username) {
+    protected void init(String hName, String hPrice, String hAddress, String hAccom) {
+        User user = new User();
+        String username = user.getUserName();
         JFrame jFrame = new JFrame();
         JTextArea hotelDisplayText = new JTextArea(hName + "\n" + hAddress + "\n" + hAccom + "\n" + hPrice);
         hotelDisplayText.setBounds(500, 100, 350, 160);
