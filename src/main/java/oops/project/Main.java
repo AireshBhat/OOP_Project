@@ -13,6 +13,6 @@ public class Main {
       // new HotelStayDetails();
       // HotelList hl = new HotelList();
       Booking bk = new Booking();
-      bk.init();
+      bk.init("1000", "20000", "200000", "20000");
     }
 }

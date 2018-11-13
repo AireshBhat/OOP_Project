@@ -95,8 +95,8 @@ public class HotelStayDetails {
           invalidDate.setVisible(true);
         } else {
           hotelLogic.addData(location.getText(), hIn.getText(), hOut.getText(), noRooms.getText(), noPpl.getText());
-          f.dispose();
           fm.runHotelListFrame();
+          f.dispose();
           // fm.closeHotelStayDetailsFrame();
         }
       }

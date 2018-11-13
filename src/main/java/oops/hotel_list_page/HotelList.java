@@ -24,15 +24,15 @@ public class HotelList {
   User user = new User();
   // Instantiate an object of the logic class for this class
   HotelListLogic hll = new HotelListLogic();
+  Booking bk = new Booking();
   protected static final String HOTEL_FILE = "./src/main/java/static_files/hotel_info.csv";
   ArrayList<String[]> listOfHotels = hll.hotelList();
 
   int numberOfHotels = listOfHotels.size();
 
-  JFrame jFrame;
-  JPanel jp;
+  JFrame jFrame, jDialog;
+  JPanel jp, jpDialog;
   JScrollPane jsp;
-  JDialog jd;
   JLabel[] hotelName = new JLabel[numberOfHotels];
   JLabel[] hotelPrice = new JLabel[numberOfHotels];
   JLabel[] hotelAddress = new JLabel[numberOfHotels];
@@ -43,6 +43,7 @@ public class HotelList {
   JLabel[] hotelAmenities = new JLabel[numberOfHotels];
   JButton[] hotelBooking = new JButton[numberOfHotels];  
   JButton[] hotelRatingAmenitites = new JButton[numberOfHotels];
+  JLabel testing = new JLabel("Testing");
 
   public HotelList () {
     createJPanel();
@@ -59,7 +60,7 @@ public class HotelList {
     jp = new JPanel() {
       @Override
       public Dimension getPreferredSize() {
-          return new Dimension(1080, startingHeight + (300 * numberOfHotels));
+          return new Dimension(1080,1000 + startingHeight + (300 * numberOfHotels));
       };
     };
     // jp.setBounds(0, 0, 1080, 720);
@@ -67,6 +68,8 @@ public class HotelList {
     name.setBounds(500, 20, 150, 40);
     jp.add(name);
     jp.setLayout(null);
+    testing.setBounds(70, (300 * numberOfHotels), 1000, 1000);
+    jp.add(testing);
     String hName, hPrice, hAddress, hAccom, hRating, hType;
 
     for (int i = 0; i < numberOfHotels; i++) {
@@ -93,9 +96,17 @@ public class HotelList {
         hotelPrice[i].setBounds(block * 26, startingHeight + (heightBlock * i) + block * 5, 200, block * 2);
         hotelRating[i].setBounds(block * 4, startingHeight + (heightBlock * i) + block * 10, 100, block * 2);
         hotelBooking[i].setBounds(block * 26, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
+        hotelRatingAmenitites[i].setBounds(block * 10, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
         hotelRatingAmenitites[i].addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
+            createDialog(item[5], item[4]);
+          }
+        });
+        hotelBooking[i].addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            bk.init(item[0], "2000", item[1], item[8]);
           }
         });
         jp.add(hotelName[i]);
@@ -105,6 +116,7 @@ public class HotelList {
         jp.add(hotelRating[i]);
         jp.add(hotelType[i]);
         jp.add(hotelBooking[i]);
+        jp.add(hotelRatingAmenitites[i]);
       }
     }    
   }
@@ -130,11 +142,59 @@ public class HotelList {
     jFrame.setVisible(true);
   }
 
-  private void createDialog(String review, String amenities, int i) {
-    String[] reviews = review.split(".");
-    jd = new JDialog(jFrame, "Reviews and Amenitites", true);
-    jd.setLayout(null);
-    hotelReview[i] = new JLabel();
+  private void createDialog(String review, String amenities) {
+    if (jDialog == null) {
+      jDialog = new JFrame();
+    }
+    jDialog.setSize(450, 400);
+    jDialog.setLocation(0, 0);
+    jDialog.setAlwaysOnTop(true);
+
+    String newline = System.getProperty("line.separator");
+    String[] reviewList = review.split("\\s+");
+    String reviews = "<html>";
+    for (int j = 0; j < reviewList.length; j += 9) {
+      // reviews += reviewList[0 + j] + reviewList[1 + j]+ reviewList[2 + j] + "<br>";
+      reviews += (0 + j) < reviewList.length ? reviewList[0 + j] + " " : "";
+      reviews += (1 + j) < reviewList.length ? reviewList[1 + j] + " " : "";
+      reviews += (2 + j) < reviewList.length ? reviewList[2 + j] + " " : "";
+      reviews += (3 + j) < reviewList.length ? reviewList[3 + j] + " " : "";
+      reviews += (4 + j) < reviewList.length ? reviewList[4 + j] + " " : "";
+      reviews += (5 + j) < reviewList.length ? reviewList[5 + j] + " " : "";
+      reviews += (6 + j) < reviewList.length ? reviewList[6 + j] + " " : "";
+      reviews += (7 + j) < reviewList.length ? reviewList[7 + j] + " " : "";
+      reviews += (8 + j) < reviewList.length ? reviewList[8 + j] + " " : "";
+      reviews += "<br>";
+      // reviews += (Integer.toString(j + 1)) + ". " + reviewList[j] + "\n";
+    }
+    reviews += "</html>";
+    String[] amenitiesList = amenities.split("[*]");
+    amenities = "<html>";
+    for (int j = 0; j < amenitiesList.length; j++) {
+      amenities += Integer.toString(j + 1) + ". " + amenitiesList[j] + "<br>";
+    }
+    amenities += "</html>";
+    testing.setText(amenities);
+
+    JLabel reviewDialog = new JLabel("Review 1");
+    reviewDialog.setBounds(250, 10, 300, 70);
+    jDialog.add(reviewDialog);
+
+    JLabel amenitiesDialog = new JLabel("Amenities");
+    amenitiesDialog.setBounds(10, 10, 140, 70);
+    jDialog.add(amenitiesDialog);
+
+    JLabel reviewDialogList = new JLabel(reviews);
+    reviewDialogList.setBounds(250, 80, 150, 200);
+    jDialog.add(reviewDialogList);
+
+    JLabel amenitiesDialogList = new JLabel(amenities);
+    amenitiesDialogList.setBounds(0, 0, 0,0);
+    jDialog.add(amenitiesDialogList);
+    jDialog.setVisible(true);
+
+
+    // hotelReview[i] = new JLabel();
   }
 
   public void actionPerformed(ActionEvent e){}
