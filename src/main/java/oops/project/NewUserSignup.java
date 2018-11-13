@@ -2,6 +2,7 @@ package oops.project;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
+import oops.hotel_list_page.HotelStayDetails;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -9,6 +10,9 @@ import java.awt.event.ActionListener;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class NewUserSignup {
 
@@ -110,13 +114,7 @@ public class NewUserSignup {
             e.printStackTrace();
         }
 
-        try {
-            int day = Integer.parseInt(birthDate.substring(0, 2));
-            int month = Integer.parseInt(birthDate.substring(3, 5));
-            if (day > 31 || month > 12 || day < 1 || month < 1) {
-                return -2;
-            }
-        } catch (NumberFormatException e) {
+        if (!HotelStayDetails.isValidDate(birthDate)) {
             return -2;
         }
 

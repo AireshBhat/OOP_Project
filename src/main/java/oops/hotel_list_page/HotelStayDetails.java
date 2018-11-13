@@ -2,13 +2,12 @@ package oops.hotel_list_page;
 
 import oops.project.*;
 
-import com.opencsv.CSVReader;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileReader;
-import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 // Class that implements the design of the frame that asks the user
 // the duration of stay, no of hotels and so on
@@ -88,8 +87,6 @@ public class HotelStayDetails {
       public void actionPerformed(ActionEvent e) {
         // int checkInDate = hotelLogic.validateDate(checkInDate);
         // int checkOutDate = hotelLogic.validateDate(checkOutDate);
-        // TODO:
-        // Custom error display for each wrong case
         if (hotelLogic.validate(hIn.getText(), hOut.getText(), noRooms.getText(), noPpl.getText()) != 1) {
           invalidDate.setText("Invalid Date Format");
           invalidDate.setVisible(true);
@@ -107,5 +104,20 @@ public class HotelStayDetails {
     f.setLayout(null);
     f.setVisible(true);
   }
+
+  public static boolean isValidDate(String date) {
+    Date date1 = null;
+    try {
+      SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+      date1 = dateFormat.parse(date);
+      if (!date.equals(dateFormat.format(date1))) {
+        date1 = null;
+      }
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+    return date1 != null;
+  }
+
   public void actionPerformed(ActionEvent e) {}
 }
