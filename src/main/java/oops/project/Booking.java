@@ -13,7 +13,7 @@ public class Booking {
 
     private final String BOOKING = "./booking.csv";
 
-    protected void init(String hName, String hPrice, String hAddress, String hAccom, String username) {
+    protected void init(String hName, String hPrice, String hAddress, String hAccom, String inDate, String outDate, String username) {
         JFrame jFrame = new JFrame();
         JTextArea hotelDisplayText = new JTextArea(hName + "\n" + hAddress + "\n" + hAccom + "\n" + hPrice);
         hotelDisplayText.setBounds(500, 100, 350, 160);
@@ -34,7 +34,7 @@ public class Booking {
                 try {
                     FileWriter fileWriter = new FileWriter(BOOKING, true);
                     CSVWriter csvWriter = new CSVWriter(fileWriter);
-                    String[] data = {username, hName, hAddress, hAccom, hPrice, String.valueOf(rand)};
+                    String[] data = {username, hName, hAddress, hAccom, inDate, outDate, hPrice, String.valueOf(rand)};
                     csvWriter.writeNext(data);
                     csvWriter.close();
                     fileWriter.close();
