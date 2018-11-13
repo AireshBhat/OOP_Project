@@ -7,6 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 public class Booking {
@@ -36,7 +39,9 @@ public class Booking {
                 try {
                     FileWriter fileWriter = new FileWriter(BOOKING, true);
                     CSVWriter csvWriter = new CSVWriter(fileWriter);
-                    String[] data = {username, hName, hAddress, hAccom, user.getCheckInDate(), user.getCheckOutDate(), hPrice, String.valueOf(rand)};
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    String date = simpleDateFormat.format(Calendar.getInstance().getTime());
+                    String[] data = {username, hName, hAddress, hAccom, user.getCheckInDate(), user.getCheckOutDate(), hPrice, String.valueOf(rand), date};
                     csvWriter.writeNext(data);
                     csvWriter.close();
                     fileWriter.close();

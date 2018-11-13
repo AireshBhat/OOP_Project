@@ -2,6 +2,7 @@ package oops.project;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
+import oops.hotel_list_page.HotelStayDetails;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,7 +13,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class UserFrame {
   User user = new User();
@@ -71,8 +78,6 @@ public class UserFrame {
       hotelName[i] = new JLabel(hName);
       hotelPrice[i] = new JLabel("Total Cost: " + hotelPrice);
       hotelAddress[i] = new JLabel(hAddress);
-      // add accom type here
-      // :TODO
       hotelAccom[i] = new JLabel("Gold");
       hotelPpl[i] = new JLabel("No. Of Guests: " + hPpl);
       hCheckInDate[i] = new JLabel("In Date: " + checkIn);
@@ -89,7 +94,94 @@ public class UserFrame {
       hBookingReference[i].setBounds(block * 10, startingHeight + (heightBlock * i) + block * 8, 200, block * 2);
       changeDate[i].setBounds(block * 4, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
       cancel[i].setBounds(block * 26, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
-      // Add the functionality of the two buttons here
+      String finalHBookRef = hBookRef;
+      cancel[i].addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+          String date = simpleDateFormat.format(Calendar.getInstance().getTime());
+          Date date1, date2;
+          try {
+            date1 = simpleDateFormat.parse(date);
+            date2 = simpleDateFormat.parse();               //TODO: Pass booking date here.
+            if (TimeUnit.DAYS.convert(date1.getTime() - date2.getTime(), TimeUnit.MILLISECONDS) > 3) {
+              //TODO: Return method after telling user if more than 3 days
+            }
+            try {
+              CSVReader csvReader = new CSVReader(new FileReader(Booking));
+              List<String[]> stringList = new ArrayList<String[]>();
+              String[] record;
+              while ((record = csvReader.readNext()) != null && !record[7].equals(finalHBookRef)) {
+                stringList.add(record);
+              }
+              csvReader.close();
+              CSVWriter csvWriter = new CSVWriter(new FileWriter(Booking, false));
+              csvWriter.writeAll(stringList);
+              csvWriter.close();
+              //TODO: Reload screen.
+            } catch (IOException e1) {
+              e1.printStackTrace();
+            }
+          } catch (ParseException e1) {
+            e1.printStackTrace();
+          }
+        }
+      });
+      String finalCheckIn = checkIn;
+      changeDate[i].addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          JDialog jDialog = new JDialog(jFrame, "Enter new dates");
+          JTextField inDateTextField = new JTextField("In Date: DD/MM/YYYY");
+          JTextField outDateTextField = new JTextField("Out Date: DD/MM/YYYY");
+          JButton submitButton = new JButton("SUBMIT");
+          submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+              jDialog.setVisible(false);
+              if (HotelStayDetails.isValidDate(inDateTextField.toString()) && HotelStayDetails.isValidDate(outDateTextField.toString())) {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                String date = simpleDateFormat.format(Calendar.getInstance().getTime());
+                Date date1, date2;
+                try {
+                  date1 = simpleDateFormat.parse(date);
+                  date2 = simpleDateFormat.parse(finalCheckIn);
+                  if (TimeUnit.DAYS.convert(date2.getTime() - date1.getTime(), TimeUnit.MILLISECONDS) < 2) {
+                    //TODO: 50% charge if less than 2 days
+                  }
+                  try {
+                    CSVReader csvReader = new CSVReader(new FileReader(Booking));
+                    List<String[]> stringList = new ArrayList<String[]>();
+                    String[] record;
+                    while ((record = csvReader.readNext()) != null) {
+                      if (record[7].equals(finalHBookRef)) {
+                        record[4] = inDateTextField.toString();
+                        record[5] = outDateTextField.toString();
+                      }
+                      stringList.add(record);
+                    }
+                    csvReader.close();
+
+                    CSVWriter csvWriter = new CSVWriter(new FileWriter(Booking, false));
+                    csvWriter.writeAll(stringList);
+                    csvWriter.close();
+                    //TODO: Reload screen.
+                  } catch (IOException e1) {
+                    e1.printStackTrace();
+                  }
+                } catch (ParseException e1) {
+                  e1.printStackTrace();
+                }
+              }
+            }
+          });
+          jDialog.add(inDateTextField);
+          jDialog.add(outDateTextField);
+          jDialog.add(submitButton);
+          jDialog.setSize(250, 250);
+          jDialog.setVisible(true);
+        }
+      });
       // :TODO
       jp.add(hotelName[i]);
       jp.add(hotelPpl[i]);
