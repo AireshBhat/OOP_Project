@@ -18,11 +18,11 @@ public class Booking {
         String username = user.getUserName();
         JFrame jFrame = new JFrame();
         JTextArea hotelDisplayText = new JTextArea(hName + "\n" + hAddress + "\n" + hAccom + "\n" + hPrice);
-        hotelDisplayText.setBounds(500, 100, 350, 160);
+        hotelDisplayText.setBounds(450, 100, 350, 160);
         jFrame.add(hotelDisplayText);
 
         JTextField idProofTextField = new JTextField("Aadhar Number");
-        idProofTextField.setBounds(500, 300, 100, 40);
+        idProofTextField.setBounds(450, 300, 200, 40);
         jFrame.add(idProofTextField);
 
         JButton bookButton = new JButton("BOOK");
@@ -45,5 +45,8 @@ public class Booking {
                 }
             }
         });
+        jFrame.setSize(1080, 720);
+        jFrame.setLayout(null);
+        jFrame.setVisible(true);
     }
 }

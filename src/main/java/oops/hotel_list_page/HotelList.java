@@ -8,8 +8,11 @@ import com.opencsv.CSVWriter;
 import javax.swing.*;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowListener;
+import java.awt.event.WindowAdapter;
 import java.awt.Dimension;
 
 import java.io.FileReader;
@@ -31,7 +34,7 @@ public class HotelList {
   int numberOfHotels = listOfHotels.size();
 
   JFrame jFrame, jDialog;
-  JPanel jp, jpDialog;
+  JPanel jp;
   JScrollPane jsp;
   JLabel[] hotelName = new JLabel[numberOfHotels];
   JLabel[] hotelPrice = new JLabel[numberOfHotels];
@@ -43,7 +46,11 @@ public class HotelList {
   JLabel[] hotelAmenities = new JLabel[numberOfHotels];
   JButton[] hotelBooking = new JButton[numberOfHotels];  
   JButton[] hotelRatingAmenitites = new JButton[numberOfHotels];
-  JLabel testing = new JLabel("Testing");
+  // JLabel testing = new JLabel("Testing");
+  JLabel reviewDialog = new JLabel();
+  JLabel amenitiesDialog = new JLabel();
+  JLabel reviewDialogList = new JLabel();
+  JLabel amenitiesDialogList = new JLabel();
 
   public HotelList () {
     createJPanel();
@@ -60,7 +67,7 @@ public class HotelList {
     jp = new JPanel() {
       @Override
       public Dimension getPreferredSize() {
-          return new Dimension(1080,1000 + startingHeight + (300 * numberOfHotels));
+          return new Dimension(1080,startingHeight + (300 * numberOfHotels));
       };
     };
     // jp.setBounds(0, 0, 1080, 720);
@@ -68,8 +75,8 @@ public class HotelList {
     name.setBounds(500, 20, 150, 40);
     jp.add(name);
     jp.setLayout(null);
-    testing.setBounds(70, (300 * numberOfHotels), 1000, 1000);
-    jp.add(testing);
+    // testing.setBounds(70, (300 * numberOfHotels), 1000, 1000);
+    // jp.add(testing);
     String hName, hPrice, hAddress, hAccom, hRating, hType;
 
     for (int i = 0; i < numberOfHotels; i++) {
@@ -129,7 +136,7 @@ public class HotelList {
       };
     };
     jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
-    jsp.setLocation(0,0);
+    jsp.setLocation(0, 0);
     jsp.setSize(1080, 720);
   }
 
@@ -174,23 +181,28 @@ public class HotelList {
       amenities += Integer.toString(j + 1) + ". " + amenitiesList[j] + "<br>";
     }
     amenities += "</html>";
-    testing.setText(amenities);
+    // testing.setText(amenities);
 
-    JLabel reviewDialog = new JLabel("Review 1");
+    reviewDialog.setText("Review 1");
     reviewDialog.setBounds(250, 10, 300, 70);
     jDialog.add(reviewDialog);
 
-    JLabel amenitiesDialog = new JLabel("Amenities");
+    amenitiesDialog.setText("Amenities");
     amenitiesDialog.setBounds(10, 10, 140, 70);
     jDialog.add(amenitiesDialog);
 
-    JLabel reviewDialogList = new JLabel(reviews);
+    reviewDialogList.setText(reviews);
     reviewDialogList.setBounds(250, 80, 150, 200);
     jDialog.add(reviewDialogList);
 
-    JLabel amenitiesDialogList = new JLabel(amenities);
+    amenitiesDialogList.setText(amenities);
     amenitiesDialogList.setBounds(0, 0, 0,0);
     jDialog.add(amenitiesDialogList);
+    jDialog.addWindowListener(new WindowAdapter() {
+      @Override
+      public void windowDeactivated(WindowEvent e){
+      }
+    });
     jDialog.setVisible(true);
 
 

@@ -15,13 +15,12 @@ public class FrameControl {
   public void runHotelStayDetailsFrame() {
     hsd = new HotelStayDetails();
   }
-  // HotelListFrame hlf;
-  // public void runHotelListFrame() {
-    // hlf = new HotelListFrame();
-    // hlf.init();
-  // }
   HotelList hl;
   public void runHotelListFrame() {
     hl = new HotelList();
+  }
+  UserFrame uf;
+  public void runUserFrame() {
+    uf = new UserFrame();
   }
 }
