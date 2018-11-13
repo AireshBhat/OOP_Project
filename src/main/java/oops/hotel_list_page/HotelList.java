@@ -114,6 +114,7 @@ public class HotelList {
           @Override
           public void actionPerformed(ActionEvent e) {
             bk.init(item[0], "2000", item[1], item[8]);
+            jFrame.dispose();
           }
         });
         jp.add(hotelName[i]);

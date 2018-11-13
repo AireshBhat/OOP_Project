@@ -48,7 +48,7 @@ public class UserFrame {
     jp = new JPanel() {
       @Override
       public Dimension getPreferredSize() {
-        return new Dimension(1080, startingHeight + (300 * numberOfHotels));
+        return new Dimension(1000, startingHeight + (300 * numberOfHotels));
       };
     };
 
@@ -86,7 +86,7 @@ public class UserFrame {
       hotelPpl[i].setBounds(block * 26, startingHeight + (heightBlock * i) + block * 4, 200, block * 2);
       hCheckInDate[i].setBounds(block * 4, startingHeight + (heightBlock * i) + block * 6, 200, block * 2);
       hCheckOutDate[i].setBounds(block * 26, startingHeight + (heightBlock * i) + block * 6, 200, block * 2);
-      hBookingReference[i].setBounds(block * 10, startingHeight + (heightBlock * i) + block * 8, 200, block * 2);
+      hBookingReference[i].setBounds(block * 14, startingHeight + (heightBlock * i) + block * 8, 200, block * 2);
       changeDate[i].setBounds(block * 4, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
       cancel[i].setBounds(block * 26, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
       // Add the functionality of the two buttons here

@@ -15,6 +15,7 @@ public class Booking {
 
     public void init(String hName, String hPrice, String hAddress, String hAccom) {
         User user = new User();
+        FrameControl fm = new FrameControl();
         String username = user.getUserName();
         JFrame jFrame = new JFrame();
         JTextArea hotelDisplayText = new JTextArea(hName + "\n" + hAddress + "\n" + hAccom + "\n" + hPrice);
@@ -43,6 +44,8 @@ public class Booking {
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
+                fm.runUserFrame();
+                jFrame.dispose();
             }
         });
         jFrame.setSize(1080, 720);
