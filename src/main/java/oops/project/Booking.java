@@ -36,7 +36,7 @@ public class Booking {
                 try {
                     FileWriter fileWriter = new FileWriter(BOOKING, true);
                     CSVWriter csvWriter = new CSVWriter(fileWriter);
-                    String[] data = {username, hName, hAddress, hAccom, hPrice, String.valueOf(rand)};
+                    String[] data = {username, hName, hAddress, hAccom, inDate, outDate, hPrice, String.valueOf(rand)};
                     csvWriter.writeNext(data);
                     csvWriter.close();
                     fileWriter.close();
