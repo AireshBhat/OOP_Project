@@ -112,6 +112,18 @@ public class UserFrame {
       hBookingReference[i] = new JLabel("Booking Reference: " + hBookRef);
       changeDate[i] = new JButton("Change Date");
       cancel[i] = new JButton("Cancel Booking");
+<<<<<<< HEAD
+      hotelName[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block, 300, block * 2);
+      hotelAccom[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block, 200, block * 2);
+      hotelAddress[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 4, 300, block * 2);
+      hotelPpl[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 4, 200, block * 2);
+      hCheckInDate[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 6, 200, block * 2);
+      hCheckOutDate[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 6, 200, block * 2);
+      hBookingReference[i].setBounds(block * 33, startingHeight + (heightBlock * i) + block * 8, 200, block * 2);
+      changeDate[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
+      cancel[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
+      // Add the functionality of the two buttons here
+=======
       hotelName[i].setBounds(block * 4, startingHeight + (heightBlock * i) + block, 300, block * 2);
       hotelAccom[i].setBounds(block * 26, startingHeight + (heightBlock * i) + block, 200, block * 2);
       hotelAddress[i].setBounds(block * 4, startingHeight + (heightBlock * i) + block * 4, 300, block * 2);
@@ -209,6 +221,7 @@ public class UserFrame {
           jDialog.setVisible(true);
         }
       });
+>>>>>>> fd05378e3c7b8349557bd25980391fb69567a7c9
       // :TODO
       jp.add(hotelName[i]);
       jp.add(hotelPpl[i]);
