@@ -58,7 +58,7 @@ public class HotelStayDetails {
     hInLabel.setBounds(300, 150, 150, 40);
     f.add(hInLabel);
     // add the check in date text box
-    hIn = new JTextField("Location");
+    hIn = new JTextField("DD/MM/YYYY");
     hIn.setBounds(500, 150, 150, 40);
     f.add(hIn);
 
@@ -67,7 +67,7 @@ public class HotelStayDetails {
     locationLabel.setBounds(300, 100, 150, 40);
     f.add(locationLabel);
     // add the check in date text box
-    location = new JTextField("DD/MM/YYYY");
+    location = new JTextField("Location");
     location.setBounds(500, 100, 150, 40);
     f.add(location);
 

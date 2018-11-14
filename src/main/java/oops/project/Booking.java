@@ -21,9 +21,41 @@ public class Booking {
         FrameControl fm = new FrameControl();
         String username = user.getUserName();
         JFrame jFrame = new JFrame();
-        JTextArea hotelDisplayText = new JTextArea(hName + "\n" + hAddress + "\n" + hAccom + "\n" + hPrice);
-        hotelDisplayText.setBounds(450, 100, 350, 160);
-        jFrame.add(hotelDisplayText);
+        // JTextArea hotelDisplayText = new JTextArea(hName + "\n" + hAddress + "\n" + hAccom + "\n" + hPrice);
+        // hotelDisplayText.setBounds(450, 100, 350, 160);
+        // jFrame.add(hotelDisplayText);
+
+        JLabel hotelNameLabel = new JLabel("Hotel Name:");
+        hotelNameLabel.setBounds(250, 100, 200, 40);
+        jFrame.add(hotelNameLabel);
+
+        JLabel hotelName = new JLabel(hName);
+        hotelName.setBounds(450, 100, 300, 40);
+        jFrame.add(hotelName);
+
+        JLabel hotelAddressLabel = new JLabel("Address:");
+        hotelAddressLabel.setBounds(250, 150, 200, 40);
+        jFrame.add(hotelAddressLabel);
+
+        JLabel hotelAddress = new JLabel(hAddress);
+        hotelAddress.setBounds(450, 150, 400, 40);
+        jFrame.add(hotelAddress);
+
+        JLabel hotelAccomLabel = new JLabel("Accom Type:");
+        hotelAccomLabel.setBounds(250, 200, 200, 40);
+        jFrame.add(hotelAccomLabel);
+
+        JLabel hotelAccom = new JLabel(hAccom);
+        hotelAccom.setBounds(550, 200, 200, 40);
+        jFrame.add(hotelAccom);
+
+        JLabel hotelPriceLabel = new JLabel("Total Cost:");
+        hotelPriceLabel.setBounds(250, 250, 200, 40);
+        jFrame.add(hotelPriceLabel);
+
+        JLabel hotelPrice = new JLabel(hPrice);
+        hotelPrice.setBounds(450, 250, 200, 40);
+        jFrame.add(hotelPrice);
 
         JTextField idProofTextField = new JTextField("Aadhar Number");
         idProofTextField.setBounds(450, 300, 200, 40);
