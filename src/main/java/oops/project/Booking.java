@@ -109,6 +109,7 @@ public class Booking {
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                     String date = simpleDateFormat.format(Calendar.getInstance().getTime());
                     if (waitListed(username, hName, hAddress, hType, user.checkInDate, user.checkOutDate)) {
+                    JOptionPane.showMessageDialog(jFrame, "You have been waitlisted", "Error", JOptionPane.ERROR_MESSAGE);
                     String[] data = {username, hName, hAddress, hAccom, user.getCheckInDate(), user.getCheckOutDate(), hPrice, String.valueOf(rand), date, hType, Integer.toString(pricePerNight), "waitlisted"};
                     csvWriter.writeNext(data);
                     } else {

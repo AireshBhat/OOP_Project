@@ -53,6 +53,7 @@ public class UserFrame {
   private JLabel[] hBookingReference = new JLabel[numberOfHotels];
   private JButton[] changeDate = new JButton[numberOfHotels];
   private JButton[] cancel = new JButton[numberOfHotels];
+  private JLabel[] waitlistedLabel = new JLabel[numberOfHotels];
 
   private void createJPanel() {
     int startingHeight = 170;
@@ -148,8 +149,12 @@ public class UserFrame {
       hotelAddress[i] = new JLabel(hAddress);
       hotelAccom[i] = new JLabel("Gold");
       hotelPpl[i] = new JLabel("No. Of Guests: " + hPpl);
-      hCheckInDate[i] = new JLabel("In Date: " + checkIn);
-      hCheckOutDate[i] = new JLabel("Out Date: " + checkOut);
+      if (!item[11].equals("waitlisted")){
+        hCheckInDate[i] = new JLabel("In Date: " + checkIn);
+        hCheckOutDate[i] = new JLabel("Out Date: " + checkOut);
+      } else {
+        waitlistedLabel[i] = new JLabel("You have been waitlisted");
+      }
       hBookingReference[i] = new JLabel("Booking Reference: " + hBookRef);
       changeDate[i] = new JButton("Change Date");
       cancel[i] = new JButton("Cancel Booking");
@@ -157,8 +162,12 @@ public class UserFrame {
       hotelAccom[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block, 200, block * 2);
       hotelAddress[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 4, 300, block * 2);
       hotelPpl[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 4, 200, block * 2);
-      hCheckInDate[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 8, 200, block * 2);
-      hCheckOutDate[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 8, 200, block * 2);
+      if (!item[11].equals("waitlisted")){
+        hCheckInDate[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 8, 200, block * 2);
+        hCheckOutDate[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 8, 200, block * 2);
+      } else {
+        waitlistedLabel[i].setBounds(block * 30, startingHeight + (heightBlock * i) + block * 8, 200, block * 2);
+      }
       hBookingReference[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
       hotelPrice[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
       changeDate[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 12, 200, block * 2);
@@ -301,10 +310,14 @@ public class UserFrame {
       jp.add(hotelAddress[i]);
       jp.add(hotelAccom[i]);
       jp.add(hotelPpl[i]);
-      jp.add(hCheckInDate[i]);
-      jp.add(hCheckOutDate[i]);
+      if (!item[11].equals("waitlisted")){
+        jp.add(hCheckInDate[i]);
+        jp.add(hCheckOutDate[i]);
+        jp.add(changeDate[i]);
+      } else {
+        jp.add(waitlistedLabel[i]);
+      }
       jp.add(hBookingReference[i]);
-      jp.add(changeDate[i]);
       jp.add(cancel[i]);
     }
   }
