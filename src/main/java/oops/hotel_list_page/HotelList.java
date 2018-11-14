@@ -92,6 +92,17 @@ public class HotelList {
     jp.add(name);
     jp.setLayout(null);
 
+    JButton backButton = new JButton("Back");
+    backButton.setBounds(100, 20, 100, 40);
+    jp.add(backButton);
+    backButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        fm.runHotelStayDetailsFrame();
+        jFrame.dispose();
+      }
+    });
+
     backButton.setBounds(100, 20, 100, 40);
     jp.add(backButton);
     backButton.addActionListener(new ActionListener() {

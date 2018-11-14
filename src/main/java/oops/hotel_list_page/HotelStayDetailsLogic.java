@@ -88,7 +88,7 @@ public class HotelStayDetailsLogic {
     return (((year % 4 == 0) &&  (year % 100 != 0)) ||  (year % 400 == 0)); 
   } 
 
-static boolean isValidDate(int d, int m, int y) { 
+  public static boolean isValidDate(int d, int m, int y) { 
       if (y > MAX_VALID_YR || y < MIN_VALID_YR) 
           return false; 
       if (m < 1 || m > 12) 
