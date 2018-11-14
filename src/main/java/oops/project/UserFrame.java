@@ -239,11 +239,8 @@ public class UserFrame {
               } else {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 String date = simpleDateFormat.format(Calendar.getInstance().getTime());
-                Date date1, date2;
+                Date date1, date2 = null;
                 try {
-                  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                  String date = simpleDateFormat.format(Calendar.getInstance().getTime());
-                  Date date1, date2 = null;
                   CSVReader csvReader = new CSVReader(new FileReader(Booking));
                   String[] record;
                   while ((record = csvReader.readNext()) != null) {
