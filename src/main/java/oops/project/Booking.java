@@ -16,7 +16,7 @@ public class Booking {
 
     private final String BOOKING = "./src/main/java/static_files/booking.csv";
 
-    public void init(String hName, String hPrice, String hAddress, String hAccom) {
+    public void init(String hName, String hPrice, String hAddress, String hAccom, String hType) {
         User user = new User();
         FrameControl fm = new FrameControl();
         String username = user.getUserName();
@@ -42,7 +42,7 @@ public class Booking {
                     CSVWriter csvWriter = new CSVWriter(fileWriter);
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                     String date = simpleDateFormat.format(Calendar.getInstance().getTime());
-                    String[] data = {username, hName, hAddress, hAccom, user.getCheckInDate(), user.getCheckOutDate(), hPrice, String.valueOf(rand), date};
+                    String[] data = {username, hName, hAddress, hAccom, user.getCheckInDate(), user.getCheckOutDate(), hPrice, String.valueOf(rand), date, hType};
                     csvWriter.writeNext(data);
                     csvWriter.close();
                     fileWriter.close();

@@ -21,6 +21,13 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.GregorianCalendar;
+import java.util.Calendar;
+import java.util.Date;
+import java.text.NumberFormat;
+import java.text.ParseException;
+
+// import java.util.DateFormat;
 
 
 public class HotelList {
@@ -28,10 +35,17 @@ public class HotelList {
   // Instantiate an object of the logic class for this class
   HotelListLogic hll = new HotelListLogic();
   Booking bk = new Booking();
+  // Initializing calendar object
+  Calendar gInDate, gOutDate;
   protected static final String HOTEL_FILE = "./src/main/java/static_files/hotel_info.csv";
   ArrayList<String[]> listOfHotels = hll.hotelList();
 
   int numberOfHotels = listOfHotels.size();
+  int totalCost = 0;
+  int hotelPPN;
+  String month[] = { "Jan", "Feb", "Mar", "Apr", 
+                     "May", "Jun", "Jul", "Aug", 
+                     "Sep", "Oct", "Nov", "Dec" }; 
 
   JFrame jFrame, jDialog;
   JPanel jp;
@@ -46,7 +60,7 @@ public class HotelList {
   JLabel[] hotelAmenities = new JLabel[numberOfHotels];
   JButton[] hotelBooking = new JButton[numberOfHotels];  
   JButton[] hotelRatingAmenitites = new JButton[numberOfHotels];
-  // JLabel testing = new JLabel("Testing");
+  JLabel testing = new JLabel("Testing");
   JLabel reviewDialog = new JLabel();
   JLabel amenitiesDialog = new JLabel();
   JLabel reviewDialogList = new JLabel();
@@ -75,7 +89,7 @@ public class HotelList {
     name.setBounds(500, 20, 150, 40);
     jp.add(name);
     jp.setLayout(null);
-    // testing.setBounds(70, (300 * numberOfHotels), 1000, 1000);
+    // testing.setBounds(600, 200, 300, 30);
     // jp.add(testing);
     String hName, hPrice, hAddress, hAccom, hRating, hType;
 
@@ -113,7 +127,37 @@ public class HotelList {
         hotelBooking[i].addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
-            bk.init(item[0], "2000", item[1], item[8]);
+            String[] parsedInDate = user.getCheckInDate().split("/");
+            int gInDay = Integer.parseInt(parsedInDate[0]);
+            int gInMonth = Integer.parseInt(parsedInDate[1]);
+            int gInYear = Integer.parseInt(parsedInDate[2]);
+            String[] parsedOutDate = user.getCheckOutDate().split("/");
+            int gOutDay = Integer.parseInt(parsedOutDate[0]);
+            int gOutMonth = Integer.parseInt(parsedOutDate[1]);
+            int gOutYear = Integer.parseInt(parsedOutDate[2]);
+            // gInDate = new GregorianCalendar(gInYear, gInMonth, gInDay);
+            // gOutDate = new GregorianCalendar(gOutYear, gOutMonth, gOutDay);
+            gInDate = Calendar.getInstance();
+            gOutDate = Calendar.getInstance();
+            gInDate.set(gInYear, gInMonth, gInDay);
+            gOutDate.set(gOutYear, gOutMonth, gOutDay);
+            Date startDate = gInDate.getTime();
+            Date endDate = gOutDate.getTime();
+            long startTime = startDate.getTime();
+            long endTime = endDate.getTime();
+            long diffTime = endTime - startTime;
+            long diffDays = diffTime / (1000 * 60 * 60 * 24);
+            String testingString = item[9];
+            try {
+              // hotelPPN = Integer.parseInt(testingString);
+              hotelPPN = NumberFormat.getNumberInstance(java.util.Locale.US).parse(item[9]).intValue();
+            } catch (ParseException ee){
+              // testing.setText("number format");
+              ee.printStackTrace();
+            }
+            long totalCost = diffDays * hotelPPN * (long)Integer.valueOf(user.getRoom());
+            testing.setText(Long.toString(totalCost));
+            bk.init(item[0], Long.toString(totalCost), item[1], item[8], item[7]);
             jFrame.dispose();
           }
         });

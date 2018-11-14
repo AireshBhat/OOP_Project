@@ -20,7 +20,7 @@ public class HotelStayDetails {
 
   JTextField hOut, hIn, noRooms, noPpl, location;
   JLabel hOutLabel, hInLabel, noRoomsLabel, noPplLabel, userLabel, locationLabel;
-  JButton submitButton, userPage;
+  JButton submitButton, userPage, logOut;
   JTextArea invalidDate;
   public HotelStayDetails() {
     User user = new User();
@@ -32,7 +32,7 @@ public class HotelStayDetails {
     f.add(userLabel);
 
     userPage = new JButton("Profile");
-    userPage.setBounds(800, 20, 150, 40);
+    userPage.setBounds(100, 20, 150, 40);
     userPage.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -40,19 +40,30 @@ public class HotelStayDetails {
         f.dispose();
       }
     });
+
+    logOut = new JButton("LogOut");
+    logOut.setBounds(800, 20, 150, 40);
+    logOut.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        fm.runLoginScreen();
+        f.dispose();
+      }
+    });
     f.add(userPage);
+    f.add(logOut);
 
     // add the label for the check in date text box
     hInLabel = new JLabel("Check In Date");
     hInLabel.setBounds(300, 150, 150, 40);
     f.add(hInLabel);
     // add the check in date text box
-    hIn = new JTextField("DD/MM/YYYY");
+    hIn = new JTextField("Location");
     hIn.setBounds(500, 150, 150, 40);
     f.add(hIn);
 
     // add the label for the check in date text box
-    locationLabel = new JLabel("Location");
+    locationLabel = new JLabel("Location:");
     locationLabel.setBounds(300, 100, 150, 40);
     f.add(locationLabel);
     // add the check in date text box
@@ -61,7 +72,7 @@ public class HotelStayDetails {
     f.add(location);
 
     // add the label for the check out date text box
-    hOutLabel = new JLabel("Check Out Date");
+    hOutLabel = new JLabel("Check Out Date:");
     hOutLabel.setBounds(300, 200, 150, 40);
     f.add(hOutLabel);
     // add the check out date text box
@@ -70,7 +81,7 @@ public class HotelStayDetails {
     f.add(hOut);
 
     // add the label for the number of rooom
-    noRoomsLabel = new JLabel("Number Of Rooms");
+    noRoomsLabel = new JLabel("Number Of Rooms:");
     noRoomsLabel.setBounds(300, 250, 150, 40);
     f.add(noRoomsLabel);
     // add the number of rooms text box
@@ -79,7 +90,7 @@ public class HotelStayDetails {
     f.add(noRooms);
 
     // add the label for the number of rooom
-    noPplLabel = new JLabel("Number of People");
+    noPplLabel = new JLabel("Number of People:");
     noPplLabel.setBounds(300, 300, 150, 40);
     f.add(noPplLabel);
     // add the number of people texr box

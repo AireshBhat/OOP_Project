@@ -223,7 +223,6 @@ public class UserFrame {
           jDialog.setVisible(true);
         }
       });
-      // :TODO
       jp.add(hotelName[i]);
       jp.add(hotelPpl[i]);
       jp.add(hotelAddress[i]);
