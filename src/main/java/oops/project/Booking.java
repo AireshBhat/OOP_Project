@@ -29,11 +29,11 @@ public class Booking {
         backButton.setBounds(100, 20, 100, 40);
         jFrame.add(backButton);
         backButton.addActionListener(new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-            fm.runHotelListFrame();
-            jFrame.dispose();
-          }
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fm.runHotelListFrame();
+                jFrame.dispose();
+            }
         });
 
         JLabel hotelNameLabel = new JLabel("Hotel Name:");
