@@ -170,9 +170,8 @@ public class UserFrame {
           Date date1, date2;
           try {
             date1 = simpleDateFormat.parse(date);
-            date2 = simpleDateFormat.parse(user.getCheckInDate());               //TODO: Pass booking date here.
+            date2 = simpleDateFormat.parse(user.getCheckInDate());
             if (TimeUnit.DAYS.convert(date1.getTime() - date2.getTime(), TimeUnit.MILLISECONDS) > 3) {
-              //TODO: Return method after telling user if more than 3 days
               JOptionPane.showMessageDialog(jp, "Cannot change booking after 3 days from booking.", "Error", JOptionPane.ERROR_MESSAGE);
               return;
             }
@@ -217,7 +216,7 @@ public class UserFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
               jDialog.setVisible(false);
-              if (HotelStayDetails.isValidDate(inDateTextField.toString()) && HotelStayDetails.isValidDate(outDateTextField.toString())) {
+              if (HotelStayDetails.isValidDate(inDateTextField.getText()) && HotelStayDetails.isValidDate(outDateTextField.getText())) {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 String date = simpleDateFormat.format(Calendar.getInstance().getTime());
                 Date date1, date2;
@@ -225,7 +224,11 @@ public class UserFrame {
                   date1 = simpleDateFormat.parse(date);
                   date2 = simpleDateFormat.parse(finalCheckIn);
                   if (TimeUnit.DAYS.convert(date2.getTime() - date1.getTime(), TimeUnit.MILLISECONDS) < 2) {
-                    //TODO: 50% charge if less than 2 days
+                    JDialog jDialog = new JDialog(jFrame, "Alert");
+                    jDialog.setLayout(null);
+                    JTextField alertTextField = new JTextField("You will be charged 50% of the total fee!");
+                    jDialog.add(alertTextField);
+                    jDialog.setVisible(true);
                   }
                   try {
                     CSVReader csvReader = new CSVReader(new FileReader(Booking));
@@ -233,8 +236,8 @@ public class UserFrame {
                     String[] record;
                     while ((record = csvReader.readNext()) != null) {
                       if (record[7].equals(finalHBookRef)) {
-                        record[4] = inDateTextField.toString();
-                        record[5] = outDateTextField.toString();
+                        record[4] = inDateTextField.getText();
+                        record[5] = outDateTextField.getText();
                       }
                       stringList.add(record);
                     }
