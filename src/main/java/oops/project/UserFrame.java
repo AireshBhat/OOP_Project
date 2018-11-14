@@ -130,7 +130,7 @@ public class UserFrame {
           Date date1, date2;
           try {
             date1 = simpleDateFormat.parse(date);
-            date2 = simpleDateFormat.parse("22/1/2222");               //TODO: Pass booking date here.
+            date2 = simpleDateFormat.parse(user.getCheckInDate());               //TODO: Pass booking date here.
             if (TimeUnit.DAYS.convert(date1.getTime() - date2.getTime(), TimeUnit.MILLISECONDS) > 3) {
               //TODO: Return method after telling user if more than 3 days
               JOptionPane.showMessageDialog(jp, "Cannot change booking after 3 days from booking.", "Error", JOptionPane.ERROR_MESSAGE);
