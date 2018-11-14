@@ -186,6 +186,9 @@ public class UserFrame {
                 // testing.setText("numberFormat");
                 ee.printStackTrace();
             }
+          } finally {}
+        }
+      });
             long totalCost = diffDays * hotelPPN * (long) Integer.valueOf(user.getRoom());
 
             hBookRef = item[7];
@@ -247,6 +250,7 @@ public class UserFrame {
                     }
                 }
             });
+          } 
             String finalCheckIn = checkIn;
             changeDate[i].addActionListener(new ActionListener() {
                 @Override
@@ -346,7 +350,7 @@ public class UserFrame {
             jp.add(hBookingReference[i]);
             jp.add(changeDate[i]);
             jp.add(cancel[i]);
-        }
+        } 
     }
 
     private void createJScrollPane() {
