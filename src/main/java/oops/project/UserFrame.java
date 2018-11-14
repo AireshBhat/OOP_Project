@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class UserFrame {
+class UserFrame {
     private User user = new User();
     private static String Booking = "./src/main/java/static_files/booking.csv";
     private ArrayList<String[]> listOfHotels = getListOfHotels();

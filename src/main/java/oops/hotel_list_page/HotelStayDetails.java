@@ -5,14 +5,11 @@ import oops.project.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 // Class that implements the design of the frame that asks the user
 // the duration of stay, no of hotels and so on
 public class HotelStayDetails {
-    protected static final String FILE = "./src/main/java/static_files/users.csv";
+    static final String FILE = "./src/main/java/static_files/users.csv";
     // Instantiate an object of the logic class for this class
     private HotelStayDetailsLogic hotelLogic = new HotelStayDetailsLogic();
     private FrameControl fm = new FrameControl();
@@ -23,15 +20,6 @@ public class HotelStayDetails {
     private JTextField noRooms;
     private JTextField noPpl;
     private JTextField location;
-    private JLabel hOutLabel;
-    private JLabel hInLabel;
-    private JLabel noRoomsLabel;
-    private JLabel noPplLabel;
-    private JLabel userLabel;
-    private JLabel locationLabel;
-    private JButton submitButton;
-    private JButton userPage;
-    private JButton logOut;
     private JTextArea invalidDate;
 
     public HotelStayDetails() {
@@ -39,11 +27,11 @@ public class HotelStayDetails {
 
         // Add the Label depicting the name of the user
         String curUserName = User.name;
-        userLabel = new JLabel(curUserName);
+        JLabel userLabel = new JLabel(curUserName);
         userLabel.setBounds(500, 20, 150, 40);
         f.add(userLabel);
 
-        userPage = new JButton("Profile");
+        JButton userPage = new JButton("Profile");
         userPage.setBounds(100, 20, 150, 40);
         userPage.addActionListener(new ActionListener() {
             @Override
@@ -53,7 +41,7 @@ public class HotelStayDetails {
             }
         });
 
-        logOut = new JButton("LogOut");
+        JButton logOut = new JButton("LogOut");
         logOut.setBounds(800, 20, 150, 40);
         logOut.addActionListener(new ActionListener() {
             @Override
@@ -66,7 +54,7 @@ public class HotelStayDetails {
         f.add(logOut);
 
         // add the label for the check in date text box
-        hInLabel = new JLabel("Check In Date");
+        JLabel hInLabel = new JLabel("Check In Date");
         hInLabel.setBounds(300, 150, 150, 40);
         f.add(hInLabel);
         // add the check in date text box
@@ -78,7 +66,7 @@ public class HotelStayDetails {
         }
 
         // add the label for the check in date text box
-        locationLabel = new JLabel("Location:");
+        JLabel locationLabel = new JLabel("Location:");
         locationLabel.setBounds(300, 100, 150, 40);
         f.add(locationLabel);
         // add the check in date text box
@@ -90,7 +78,7 @@ public class HotelStayDetails {
         }
 
         // add the label for the check out date text box
-        hOutLabel = new JLabel("Check Out Date:");
+        JLabel hOutLabel = new JLabel("Check Out Date:");
         hOutLabel.setBounds(300, 200, 150, 40);
         f.add(hOutLabel);
         // add the check out date text box
@@ -102,7 +90,7 @@ public class HotelStayDetails {
         }
 
         // add the label for the number of rooom
-        noRoomsLabel = new JLabel("Number Of Rooms:");
+        JLabel noRoomsLabel = new JLabel("Number Of Rooms:");
         noRoomsLabel.setBounds(300, 250, 150, 40);
         f.add(noRoomsLabel);
         // add the number of rooms text box
@@ -114,7 +102,7 @@ public class HotelStayDetails {
         }
 
         // add the label for the number of rooom
-        noPplLabel = new JLabel("Number of People:");
+        JLabel noPplLabel = new JLabel("Number of People:");
         noPplLabel.setBounds(300, 300, 150, 40);
         f.add(noPplLabel);
         // add the number of people texr box
@@ -131,7 +119,7 @@ public class HotelStayDetails {
         invalidDate.setVisible(false);
         f.add(invalidDate);
 
-        submitButton = new JButton("Submit");
+        JButton submitButton = new JButton("Submit");
         submitButton.setBounds(500, 350, 100, 40);
         submitButton.addActionListener(new ActionListener() {
             @Override

@@ -23,7 +23,7 @@ public class HotelList {
     private Booking bk = new Booking();
     // Initializing calendar object
     private Calendar gInDate, gOutDate;
-    protected static final String HOTEL_FILE = "./src/main/java/static_files/hotel_info.csv";
+    static final String HOTEL_FILE = "./src/main/java/static_files/hotel_info.csv";
    private ArrayList<String[]> listOfHotels = hll.hotelList();
 
     private int numberOfHotels = listOfHotels.size(), hotelPPN;
@@ -209,7 +209,7 @@ public class HotelList {
         StringBuilder reviewsBuilder = new StringBuilder("<html>");
         for (int j = 0; j < reviewList.length; j += 9) {
             // reviews += reviewList[0 + j] + reviewList[1 + j]+ reviewList[2 + j] + "<br>";
-            reviewsBuilder.append((j) < reviewList.length ? reviewList[j] + " " : "");
+            reviewsBuilder.append(reviewList[j]).append(" ");
             reviewsBuilder.append((1 + j) < reviewList.length ? reviewList[1 + j] + " " : "");
             reviewsBuilder.append((2 + j) < reviewList.length ? reviewList[2 + j] + " " : "");
             reviewsBuilder.append((3 + j) < reviewList.length ? reviewList[3 + j] + " " : "");

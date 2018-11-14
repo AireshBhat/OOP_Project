@@ -10,27 +10,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class HotelListLogic {
+class HotelListLogic {
     private User user = new User();
 
     public HotelListLogic() {
     }
 
-    protected ArrayList<String[]> hotelList() {
+    ArrayList<String[]> hotelList() {
         ArrayList<String[]> listOfHotels = new ArrayList<>();
         // String listBeforeConv[] = user.getLocation().split(",").trim();
         // List<String> hotelLocation = new ArrayList<String> jbbb
         String[] hotelLocation = user.getLocation().split("[\\s*,\\s*\\s+]");
         String[] hotelAddress;
         String[] innerHotelAddress;
-        boolean contains = false;
+        boolean contains;
         try {
             CSVReader csr = new CSVReader(new FileReader(HotelList.HOTEL_FILE));
             FileWriter fw = new FileWriter("./src/main/java/static_files/checkHotelList.csv", false);
             CSVWriter csw = new CSVWriter(fw);
             String[] recordReaderEach;
-            int addressLength = 0;
-            int innerAddressLength = 0;
+            int addressLength;
+            int innerAddressLength;
             while ((recordReaderEach = csr.readNext()) != null) {
                 contains = false;
                 hotelAddress = recordReaderEach[1].split("\\s*,\\s*");

@@ -42,20 +42,10 @@ public class User {
         User.ppl = ppl;
     }
 
-    // Function to set the name of the user
-    public void setName(String n) {
-        name = n;
-    }
-
     // Function to get the name of the user
     public String getName() {
         return name;
         // return "Airesh";
-    }
-
-    // Function to set the name of the user
-    public void setBirthday(String b) {
-        birthday = b;
     }
 
     // Function to get the name of the user
@@ -63,29 +53,14 @@ public class User {
         return birthday;
     }
 
-    // Function to set the name of the user
-    public void setAddress(String ad) {
-        address = ad;
-    }
-
     // Function to get the name of the user
     public String getAddress() {
         return address;
     }
 
-    // Function to set the name of the user
-    public void setUserName(String un) {
-        userName = un;
-    }
-
     // Function to get the name of the user
     public String getUserName() {
         return userName;
-    }
-
-    // Function to set the name of the user
-    public void setPassword(String p) {
-        password = p;
     }
 
     // Function to get the name of the user

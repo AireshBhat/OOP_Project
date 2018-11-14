@@ -11,13 +11,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class NewUserSignup {
+class NewUserSignup {
 
-    private HotelStayDetailsLogic hsl = new HotelStayDetailsLogic();
+    static final String FILE = "./src/main/java/static_files/users.csv";
 
-    protected static final String FILE = "./src/main/java/static_files/users.csv";
-
-    protected void init() {
+    void init() {
         FrameControl fc = new FrameControl();
         JFrame jFrame = new JFrame("New User SignUp");
 
