@@ -2,7 +2,7 @@ package oops.project;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
-import oops.hotel_list_page.HotelStayDetails;
+import oops.hotel_list_page.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,6 +15,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class NewUserSignup {
+
+    HotelStayDetailsLogic hsl = new HotelStayDetailsLogic();
 
     protected static final String FILE = "./src/main/java/static_files/users.csv";
 
@@ -125,7 +127,8 @@ public class NewUserSignup {
             e.printStackTrace();
         }
 
-        if (!HotelStayDetails.isValidDate(birthDate)) {
+        String[] birthdaySplit = birthDate.split("[/]");
+        if (!hsl.isValidDate(Integer.parseInt(birthdaySplit[0]), Integer.parseInt(birthdaySplit[1]), Integer.parseInt(birthdaySplit[2]))) {
             return -2;
         }
 

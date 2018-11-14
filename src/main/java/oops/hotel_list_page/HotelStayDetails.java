@@ -62,6 +62,9 @@ public class HotelStayDetails {
     hIn = new JTextField("DD/MM/YYYY");
     hIn.setBounds(500, 150, 150, 40);
     f.add(hIn);
+    if (!user.getCheckInDate().equals("")) {
+      hIn.setText(user.getCheckInDate());
+    }
 
     // add the label for the check in date text box
     locationLabel = new JLabel("Location:");
@@ -71,6 +74,9 @@ public class HotelStayDetails {
     location = new JTextField("Location");
     location.setBounds(500, 100, 150, 40);
     f.add(location);
+    if (!user.getLocation().equals("")) {
+      hIn.setText(user.getLocation());
+    }
 
     // add the label for the check out date text box
     hOutLabel = new JLabel("Check Out Date:");
@@ -80,6 +86,9 @@ public class HotelStayDetails {
     hOut = new JTextField("DD/MM/YYYY");
     hOut.setBounds(500, 200, 150, 40);
     f.add(hOut);
+    if (!user.getCheckOutDate().equals("")) {
+      hIn.setText(user.getCheckOutDate());
+    }
 
     // add the label for the number of rooom
     noRoomsLabel = new JLabel("Number Of Rooms:");
@@ -89,6 +98,9 @@ public class HotelStayDetails {
     noRooms = new JTextField("Number of Rooms");
     noRooms.setBounds(500, 250, 150, 40);
     f.add(noRooms);
+    if (!user.getRoom().equals("")) {
+      hIn.setText(user.getRoom());
+    }
 
     // add the label for the number of rooom
     noPplLabel = new JLabel("Number of People:");
@@ -98,6 +110,9 @@ public class HotelStayDetails {
     noPpl = new JTextField("Number of People");
     noPpl.setBounds(500, 300, 150, 40);
     f.add(noPpl);
+    if (!user.getPpl().equals("")) {
+      hIn.setText(user.getPpl());
+    }
 
     invalidDate = new JTextArea();
     invalidDate.setBounds(300,400, 600, 40);
@@ -118,21 +133,32 @@ public class HotelStayDetails {
             invalidDate.setText("Invalid Check In Date");
             invalidDate.setVisible(true);
           } else if (!hotelLogic.isValidDate(Integer.parseInt(hOutDateInput[0]), Integer.parseInt(hOutDateInput[1]), Integer.parseInt(hOutDateInput[2]))) {
-          invalidDate.setText("Invalid CheckOut Date");
-          invalidDate.setVisible(true);
-          } else if (hotelLogic.dateOrder(hIn.getText(), hOut.getText())) {
-          invalidDate.setText("Check In Date is greater than Check Out Date");
-          invalidDate.setVisible(true);
-          } else if(hotelLogic.legitDate(hIn.getText())) {
-          invalidDate.setText("Enter a valid Check In date");
-          invalidDate.setVisible(true);
-          } else {
-            invalidDate.setText(hOutDateInput[0]);
+            invalidDate.setText("Invalid CheckOut Date");
             invalidDate.setVisible(true);
-            // hotelLogic.addData(location.getText(), hIn.getText(), hOut.getText(), noRooms.getText(), noPpl.getText());
-            // fm.runHotelListFrame();
-            // f.dispose();
-            // fm.closeHotelStayDetailsFrame();
+          } else if (hotelLogic.dateOrder(hIn.getText(), hOut.getText())) {
+            invalidDate.setText("Check In Date is greater than Check Out Date");
+            invalidDate.setVisible(true);
+          } else if(hotelLogic.legitDate(hIn.getText())) {
+            invalidDate.setText("Enter a valid Check In date");
+            invalidDate.setVisible(true);
+          } else if (!noRooms.getText().matches("[0-9]+")) {
+            invalidDate.setText("Enter a number for number of Rooms.");
+            invalidDate.setVisible(true);
+          } else if (!noPpl.getText().matches("[0-9]+")) {
+            invalidDate.setText("Enter a number for number of People");
+            invalidDate.setVisible(true);
+          } else
+          {
+            // invalidDate.setText(hOutDateInput[0]);
+            // invalidDate.setVisible(true);
+            hotelLogic.addData(location.getText(), hIn.getText(), hOut.getText(), noRooms.getText(), noPpl.getText());
+            user.setLocation(location.getText());
+            user.setCheckInDate(hIn.getText());
+            user.setCheckOutDate(hOut.getText());
+            user.setRoom(noRooms.getText());
+            user.setPpl(noPpl.getText());
+            fm.runHotelListFrame();
+            f.dispose();
           }
         } catch (NumberFormatException ne) {
             invalidDate.setText("Invalid date type");

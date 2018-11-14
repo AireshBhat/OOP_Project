@@ -25,6 +25,17 @@ public class Booking {
         // hotelDisplayText.setBounds(450, 100, 350, 160);
         // jFrame.add(hotelDisplayText);
 
+        JButton backButton = new JButton("Back");
+        backButton.setBounds(100, 20, 100, 40);
+        jFrame.add(backButton);
+        backButton.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            fm.runHotelListFrame();
+            jFrame.dispose();
+          }
+        });
+
         JLabel hotelNameLabel = new JLabel("Hotel Name:");
         hotelNameLabel.setBounds(250, 100, 200, 40);
         jFrame.add(hotelNameLabel);
@@ -49,20 +60,36 @@ public class Booking {
         hotelAccom.setBounds(550, 200, 200, 40);
         jFrame.add(hotelAccom);
 
+        JLabel hotelCheckInLabel = new JLabel("Check In Date:");
+        hotelCheckInLabel.setBounds(250, 250, 200, 40);
+        jFrame.add(hotelCheckInLabel);
+
+        JLabel hotelCheckIn = new JLabel(user.getCheckInDate());
+        hotelCheckIn.setBounds(450, 250, 200, 40);
+        jFrame.add(hotelCheckIn);
+
+        JLabel hotelCheckOutLabel = new JLabel("Check Out Date:");
+        hotelCheckOutLabel.setBounds(250, 300, 200, 40);
+        jFrame.add(hotelCheckOutLabel);
+
+        JLabel hotelCheckOut = new JLabel(user.getCheckOutDate());
+        hotelCheckOut.setBounds(450, 300, 200, 40);
+        jFrame.add(hotelCheckOut);
+
         JLabel hotelPriceLabel = new JLabel("Total Cost:");
-        hotelPriceLabel.setBounds(250, 250, 200, 40);
+        hotelPriceLabel.setBounds(250, 350, 200, 40);
         jFrame.add(hotelPriceLabel);
 
         JLabel hotelPrice = new JLabel(hPrice);
-        hotelPrice.setBounds(450, 250, 200, 40);
+        hotelPrice.setBounds(450, 350, 200, 40);
         jFrame.add(hotelPrice);
 
         JTextField idProofTextField = new JTextField("Aadhar Number");
-        idProofTextField.setBounds(450, 300, 200, 40);
+        idProofTextField.setBounds(450, 400, 200, 40);
         jFrame.add(idProofTextField);
 
         JButton bookButton = new JButton("BOOK");
-        bookButton.setBounds(500, 350, 100, 40);
+        bookButton.setBounds(500, 450, 100, 40);
         jFrame.add(bookButton);
         bookButton.addActionListener(new ActionListener() {
             @Override
