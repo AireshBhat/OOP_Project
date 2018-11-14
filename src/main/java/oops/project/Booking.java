@@ -56,7 +56,7 @@ public class Booking {
         hotelAccomLabel.setBounds(250, 200, 200, 40);
         jFrame.add(hotelAccomLabel);
 
-        JLabel hotelAccom = new JLabel(hAccom);
+        JLabel hotelAccom = new JLabel(hType);
         hotelAccom.setBounds(550, 200, 200, 40);
         jFrame.add(hotelAccom);
 

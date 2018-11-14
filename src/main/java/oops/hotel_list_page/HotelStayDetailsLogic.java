@@ -23,7 +23,7 @@ import java.time.LocalTime;
 public class HotelStayDetailsLogic {
   User user = new User();
   static int MAX_VALID_YR = 9999; 
-  static int MIN_VALID_YR = 2017; 
+  static int MIN_VALID_YR = 1800; 
   String datePattern = "";
   public void setUserDetails(String checkInDate, String checkOutDate, int duration, int noPpl) {
     try {
@@ -69,20 +69,6 @@ public class HotelStayDetailsLogic {
     }
     return false;
   }
-
-  // public static boolean isValidDate(String format, String value) {
-  // Date date = null;
-  // try {
-      // SimpleDateFormat sdf = new SimpleDateFormat(format);
-      // date = sdf.parse(value);
-      // if (!value.equals(sdf.format(date))) {
-        // return false;
-      // }
-  // } catch (ParseException ex) {
-      // ex.printStackTrace();
-  // }
-  // return true;
-// }
 
   static boolean isLeap(int year) { 
     return (((year % 4 == 0) &&  (year % 100 != 0)) ||  (year % 400 == 0)); 

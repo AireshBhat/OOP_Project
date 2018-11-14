@@ -27,7 +27,7 @@ public class HotelStayDetails {
     User user = new User();
 
     // Add the Label depicting the name of the user
-    String curUserName = user.getName();
+    String curUserName = user.name;
     userLabel = new JLabel(curUserName);
     userLabel.setBounds(500, 20, 150, 40);
     f.add(userLabel);
@@ -62,8 +62,8 @@ public class HotelStayDetails {
     hIn = new JTextField("DD/MM/YYYY");
     hIn.setBounds(500, 150, 150, 40);
     f.add(hIn);
-    if (!user.getCheckInDate().equals("")) {
-      hIn.setText(user.getCheckInDate());
+    if (!("".equals(user.getCheckInDate()))) {
+      hIn.setText(user.checkInDate);
     }
 
     // add the label for the check in date text box
@@ -74,8 +74,8 @@ public class HotelStayDetails {
     location = new JTextField("Location");
     location.setBounds(500, 100, 150, 40);
     f.add(location);
-    if (!user.getLocation().equals("")) {
-      hIn.setText(user.getLocation());
+    if (!("".equals(user.getLocation()))) {
+      location.setText(user.location);
     }
 
     // add the label for the check out date text box
@@ -86,8 +86,8 @@ public class HotelStayDetails {
     hOut = new JTextField("DD/MM/YYYY");
     hOut.setBounds(500, 200, 150, 40);
     f.add(hOut);
-    if (!user.getCheckOutDate().equals("")) {
-      hIn.setText(user.getCheckOutDate());
+    if (!("".equals(user.getCheckOutDate()))) {
+      hOut.setText(user.checkOutDate);
     }
 
     // add the label for the number of rooom
@@ -98,8 +98,8 @@ public class HotelStayDetails {
     noRooms = new JTextField("Number of Rooms");
     noRooms.setBounds(500, 250, 150, 40);
     f.add(noRooms);
-    if (!user.getRoom().equals("")) {
-      hIn.setText(user.getRoom());
+    if ((!"".equals(user.getRoom()))) {
+      noRooms.setText(user.room);
     }
 
     // add the label for the number of rooom
@@ -110,8 +110,9 @@ public class HotelStayDetails {
     noPpl = new JTextField("Number of People");
     noPpl.setBounds(500, 300, 150, 40);
     f.add(noPpl);
-    if (!user.getPpl().equals("")) {
-      hIn.setText(user.getPpl());
+    if (!("".equals(user.getPpl()))) {
+      // hIn.setText("10");
+      noPpl.setText(user.ppl);
     }
 
     invalidDate = new JTextArea();
