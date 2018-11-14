@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 // Class that implements the design of the frame that asks the user
 // the duration of stay, no of hotels and so on
@@ -99,7 +100,7 @@ public class HotelStayDetails {
     f.add(noPpl);
 
     invalidDate = new JTextArea();
-    invalidDate.setBounds(500,400, 150, 40);
+    invalidDate.setBounds(300,400, 600, 40);
     invalidDate.setVisible(false);
     f.add(invalidDate);
 
@@ -110,10 +111,21 @@ public class HotelStayDetails {
       public void actionPerformed(ActionEvent e) {
         // int checkInDate = hotelLogic.validateDate(checkInDate);
         // int checkOutDate = hotelLogic.validateDate(checkOutDate);
-        if (hotelLogic.validate(hIn.getText(), hOut.getText(), noRooms.getText(), noPpl.getText()) != 1) {
-          invalidDate.setText("Invalid Date Format");
+        if (hotelLogic.isValidDate("dd/MM/yyyy", hIn.getText())) {
+          invalidDate.setText("Invalid Check In Date");
+          invalidDate.setVisible(true);
+        } else if (hotelLogic.isValidDate("dd/MM/yyyy", hOut.getText())) {
+          invalidDate.setText("Invalid CheckOut Date");
+          invalidDate.setVisible(true);
+        } else if (hotelLogic.dateOrder(hIn.getText(), hOut.getText())) {
+          invalidDate.setText("Check In Date is greater than Check Out Date");
+          invalidDate.setVisible(true);
+        } else if(hotelLogic.legitDate(hIn.getText())) {
+          invalidDate.setText("Enter a valid Check In date");
           invalidDate.setVisible(true);
         } else {
+          // invalidDate.setText(hIn.getText());
+          // invalidDate.setVisible(true);
           hotelLogic.addData(location.getText(), hIn.getText(), hOut.getText(), noRooms.getText(), noPpl.getText());
           fm.runHotelListFrame();
           f.dispose();

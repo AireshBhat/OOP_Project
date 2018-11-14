@@ -34,6 +34,7 @@ public class HotelList {
   User user = new User();
   // Instantiate an object of the logic class for this class
   HotelListLogic hll = new HotelListLogic();
+  FrameControl fm = new FrameControl();
   Booking bk = new Booking();
   // Initializing calendar object
   Calendar gInDate, gOutDate;
@@ -65,6 +66,7 @@ public class HotelList {
   JLabel amenitiesDialog = new JLabel();
   JLabel reviewDialogList = new JLabel();
   JLabel amenitiesDialogList = new JLabel();
+  JButton backButton = new JButton("Back");
 
   public HotelList () {
     createJPanel();
@@ -89,6 +91,16 @@ public class HotelList {
     name.setBounds(500, 20, 150, 40);
     jp.add(name);
     jp.setLayout(null);
+
+    backButton.setBounds(100, 20, 100, 40);
+    jp.add(backButton);
+    backButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        fm.runHotelStayDetailsFrame();
+        jFrame.dispose();
+      }
+    });
     // testing.setBounds(600, 200, 300, 30);
     // jp.add(testing);
     String hName, hPrice, hAddress, hAccom, hRating, hType;
