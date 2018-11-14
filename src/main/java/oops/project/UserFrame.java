@@ -130,9 +130,11 @@ public class UserFrame {
           Date date1, date2;
           try {
             date1 = simpleDateFormat.parse(date);
-            date2 = simpleDateFormat.parse("22/2/2222");               //TODO: Pass booking date here.
+            date2 = simpleDateFormat.parse("22/1/2222");               //TODO: Pass booking date here.
             if (TimeUnit.DAYS.convert(date1.getTime() - date2.getTime(), TimeUnit.MILLISECONDS) > 3) {
               //TODO: Return method after telling user if more than 3 days
+              JOptionPane.showMessageDialog(jp, "Cannot change booking after 3 days from booking.", "Error", JOptionPane.ERROR_MESSAGE);
+              return;
             }
             try {
               CSVReader csvReader = new CSVReader(new FileReader(Booking));
@@ -145,7 +147,8 @@ public class UserFrame {
               CSVWriter csvWriter = new CSVWriter(new FileWriter(Booking, false));
               csvWriter.writeAll(stringList);
               csvWriter.close();
-              //TODO: Reload screen.
+              fm.runUserFrame();
+              jFrame.dispose();
             } catch (IOException e1) {
               e1.printStackTrace();
             }
@@ -200,7 +203,8 @@ public class UserFrame {
                     CSVWriter csvWriter = new CSVWriter(new FileWriter(Booking, false));
                     csvWriter.writeAll(stringList);
                     csvWriter.close();
-                    //TODO: Reload screen.
+                    fm.runUserFrame();
+                    jFrame.dispose();
                   } catch (IOException e1) {
                     e1.printStackTrace();
                   }
