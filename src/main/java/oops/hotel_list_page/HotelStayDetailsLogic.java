@@ -22,6 +22,8 @@ import java.time.LocalTime;
 // Class that implements all the login in the frame
 public class HotelStayDetailsLogic {
   User user = new User();
+  static int MAX_VALID_YR = 9999; 
+  static int MIN_VALID_YR = 2017; 
   String datePattern = "";
   public void setUserDetails(String checkInDate, String checkOutDate, int duration, int noPpl) {
     try {
@@ -68,19 +70,47 @@ public class HotelStayDetailsLogic {
     return false;
   }
 
-  public static boolean isValidDate(String format, String value) {
-  Date date = null;
-  try {
-      SimpleDateFormat sdf = new SimpleDateFormat(format);
-      date = sdf.parse(value);
-      if (!value.equals(sdf.format(date))) {
-        return false;
-      }
-  } catch (ParseException ex) {
-      ex.printStackTrace();
-  }
-  return true;
-}
+  // public static boolean isValidDate(String format, String value) {
+  // Date date = null;
+  // try {
+      // SimpleDateFormat sdf = new SimpleDateFormat(format);
+      // date = sdf.parse(value);
+      // if (!value.equals(sdf.format(date))) {
+        // return false;
+      // }
+  // } catch (ParseException ex) {
+      // ex.printStackTrace();
+  // }
+  // return true;
+// }
+
+  static boolean isLeap(int year) { 
+    return (((year % 4 == 0) &&  (year % 100 != 0)) ||  (year % 400 == 0)); 
+  } 
+
+static boolean isValidDate(int d, int m, int y) { 
+      if (y > MAX_VALID_YR || y < MIN_VALID_YR) 
+          return false; 
+      if (m < 1 || m > 12) 
+          return false; 
+      if (d < 1 || d > 31) 
+          return false; 
+
+      // Handle February month 
+      // with leap year 
+      if (m == 2)  
+      { 
+        if (isLeap(y)) 
+          return (d <= 29); 
+        else
+          return (d <= 28); 
+      } 
+
+      if (m == 4 || m == 6 || m == 9 || m == 11) 
+        return (d <= 30); 
+
+      return true; 
+  } 
 
   // Add the data to the csv
   // We first read all the data from the csv

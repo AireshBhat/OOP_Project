@@ -12,7 +12,7 @@ public class Login {
     // Create an object from user class
     FrameControl fm = new FrameControl();
     protected void init() {
-        JFrame jFrame = new JFrame();
+        JFrame jFrame = new JFrame("Login");
         jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         JTextField userNameTextField = new JTextField("Username");
@@ -29,7 +29,7 @@ public class Login {
         jFrame.add(invalidLogin);
 
         JButton login = new JButton("SUBMIT");
-        login.setBounds(500, 200, 100, 40);
+        login.setBounds(400, 200, 100, 40);
         login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -51,7 +51,7 @@ public class Login {
         jFrame.add(login);
 
         JButton newUser = new JButton("SIGN UP");
-        newUser.setBounds(500, 250, 100, 40);
+        newUser.setBounds(600, 200, 100, 40);
         newUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

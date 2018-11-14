@@ -20,7 +20,18 @@ public class NewUserSignup {
 
     protected void init() {
         FrameControl fc = new FrameControl();
-        JFrame jFrame = new JFrame();
+        JFrame jFrame = new JFrame("New User SignUp");
+
+        JButton backButton = new JButton("Back");
+        backButton.setBounds(100, 20, 100, 40);
+        jFrame.add(backButton);
+        backButton.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            fc.runLoginScreen();
+            jFrame.dispose();
+          }
+        });
 
         JTextField nameTextField = new JTextField("Name");
         nameTextField.setBounds(500, 100, 100, 40);

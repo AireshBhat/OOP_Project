@@ -111,25 +111,32 @@ public class HotelStayDetails {
       public void actionPerformed(ActionEvent e) {
         // int checkInDate = hotelLogic.validateDate(checkInDate);
         // int checkOutDate = hotelLogic.validateDate(checkOutDate);
-        if (hotelLogic.isValidDate("dd/MM/yyyy", hIn.getText())) {
-          invalidDate.setText("Invalid Check In Date");
-          invalidDate.setVisible(true);
-        } else if (hotelLogic.isValidDate("dd/MM/yyyy", hOut.getText())) {
+        String[] hInDateInput = hIn.getText().split("[/]");
+        String[] hOutDateInput = hOut.getText().split("[/]");
+        try {
+          if (!hotelLogic.isValidDate(Integer.parseInt(hInDateInput[0]), Integer.parseInt(hInDateInput[1]), Integer.parseInt(hInDateInput[2]))) {
+            invalidDate.setText("Invalid Check In Date");
+            invalidDate.setVisible(true);
+          } else if (!hotelLogic.isValidDate(Integer.parseInt(hOutDateInput[0]), Integer.parseInt(hOutDateInput[1]), Integer.parseInt(hOutDateInput[2]))) {
           invalidDate.setText("Invalid CheckOut Date");
           invalidDate.setVisible(true);
-        } else if (hotelLogic.dateOrder(hIn.getText(), hOut.getText())) {
+          } else if (hotelLogic.dateOrder(hIn.getText(), hOut.getText())) {
           invalidDate.setText("Check In Date is greater than Check Out Date");
           invalidDate.setVisible(true);
-        } else if(hotelLogic.legitDate(hIn.getText())) {
+          } else if(hotelLogic.legitDate(hIn.getText())) {
           invalidDate.setText("Enter a valid Check In date");
           invalidDate.setVisible(true);
-        } else {
-          // invalidDate.setText(hIn.getText());
-          // invalidDate.setVisible(true);
-          hotelLogic.addData(location.getText(), hIn.getText(), hOut.getText(), noRooms.getText(), noPpl.getText());
-          fm.runHotelListFrame();
-          f.dispose();
-          // fm.closeHotelStayDetailsFrame();
+          } else {
+            invalidDate.setText(hOutDateInput[0]);
+            invalidDate.setVisible(true);
+            // hotelLogic.addData(location.getText(), hIn.getText(), hOut.getText(), noRooms.getText(), noPpl.getText());
+            // fm.runHotelListFrame();
+            // f.dispose();
+            // fm.closeHotelStayDetailsFrame();
+          }
+        } catch (NumberFormatException ne) {
+            invalidDate.setText("Invalid date type");
+            invalidDate.setVisible(true);
         }
       }
     });

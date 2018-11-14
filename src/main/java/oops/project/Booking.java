@@ -20,7 +20,7 @@ public class Booking {
         User user = new User();
         FrameControl fm = new FrameControl();
         String username = user.getUserName();
-        JFrame jFrame = new JFrame();
+        JFrame jFrame = new JFrame("Book Hotel");
         // JTextArea hotelDisplayText = new JTextArea(hName + "\n" + hAddress + "\n" + hAccom + "\n" + hPrice);
         // hotelDisplayText.setBounds(450, 100, 350, 160);
         // jFrame.add(hotelDisplayText);
