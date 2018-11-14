@@ -173,9 +173,12 @@ public class UserFrame {
           try {
             date1 = simpleDateFormat.parse(date);
             date2 = simpleDateFormat.parse(user.getCheckInDate());
-            if (TimeUnit.DAYS.convert(date1.getTime() - date2.getTime(), TimeUnit.MILLISECONDS) > 3) {
-              JOptionPane.showMessageDialog(jp, "Cannot change booking after 3 days from booking.", "Error", JOptionPane.ERROR_MESSAGE);
-              return;
+            if (TimeUnit.DAYS.convert(date2.getTime() - date1.getTime(), TimeUnit.MILLISECONDS) < 2) {
+              JDialog jDialog = new JDialog(jFrame, "Alert");
+              jDialog.setLayout(null);
+              JTextField alertTextField = new JTextField("You will be charged 50% of the total fee!");
+              jDialog.add(alertTextField);
+              jDialog.setVisible(true);
             }
             try {
               CSVReader csvReader = new CSVReader(new FileReader(Booking));
@@ -238,37 +241,41 @@ public class UserFrame {
                 String date = simpleDateFormat.format(Calendar.getInstance().getTime());
                 Date date1, date2;
                 try {
-                  date1 = simpleDateFormat.parse(date);
-                  date2 = simpleDateFormat.parse(finalCheckIn);
-                  if (TimeUnit.DAYS.convert(date2.getTime() - date1.getTime(), TimeUnit.MILLISECONDS) < 2) {
-                    JDialog jDialog = new JDialog(jFrame, "Alert");
-                    jDialog.setLayout(null);
-                    JTextField alertTextField = new JTextField("You will be charged 50% of the total fee!");
-                    jDialog.add(alertTextField);
-                    jDialog.setVisible(true);
-                  }
-                  try {
-                    CSVReader csvReader = new CSVReader(new FileReader(Booking));
-                    List<String[]> stringList = new ArrayList<String[]>();
-                    String[] record;
-                    while ((record = csvReader.readNext()) != null) {
-                      if (record[7].equals(finalHBookRef)) {
-                        record[4] = inDateTextField.getText();
-                        record[5] = outDateTextField.getText();
-                      }
-                      stringList.add(record);
+                  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                  String date = simpleDateFormat.format(Calendar.getInstance().getTime());
+                  Date date1, date2 = null;
+                  CSVReader csvReader = new CSVReader(new FileReader(Booking));
+                  String[] record;
+                  while ((record = csvReader.readNext()) != null) {
+                    if (record[7].equals(finalHBookRef)) {
+                      date2 = simpleDateFormat.parse(record[8]);
+                      break;
                     }
-                    csvReader.close();
-
-                    CSVWriter csvWriter = new CSVWriter(new FileWriter(Booking, false));
-                    csvWriter.writeAll(stringList);
-                    csvWriter.close();
-                    fm.runUserFrame();
-                    jFrame.dispose();
-                  } catch (IOException e1) {
-                    e1.printStackTrace();
                   }
-                } catch (ParseException e1) {
+                  if (date2 == null) {
+                    return; //IO error
+                  }
+                  date1 = simpleDateFormat.parse(date);
+                  if (TimeUnit.DAYS.convert(date1.getTime() - date2.getTime(), TimeUnit.MILLISECONDS) > 3) {
+                    JOptionPane.showMessageDialog(jp, "Cannot change booking after 3 days from booking.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                  }
+                  List<String[]> stringList = new ArrayList<String[]>();
+                  while ((record = csvReader.readNext()) != null) {
+                    if (record[7].equals(finalHBookRef)) {
+                      record[4] = inDateTextField.getText();
+                      record[5] = outDateTextField.getText();
+                    }
+                    stringList.add(record);
+                  }
+                  csvReader.close();
+
+                  CSVWriter csvWriter = new CSVWriter(new FileWriter(Booking, false));
+                  csvWriter.writeAll(stringList);
+                  csvWriter.close();
+                  fm.runUserFrame();
+                  jFrame.dispose();
+                } catch (IOException | ParseException e1) {
                   e1.printStackTrace();
                 }
               }
