@@ -4,16 +4,16 @@ package oops.project;
 // The same user object has to be used the entire time
 // the user stays online
 public class User {
-    static private String name;
-    static private String birthday;
-    static private String address;
-    static private String userName;
-    static private String password;
-    static private String checkInDate;
-    static private String checkOutDate;
-    static private String location;
-    static private String room;
-    static private String ppl;
+    static public String name;
+    static public String birthday;
+    static public String address;
+    static public String userName;
+    static public String password;
+    static public String checkInDate;
+    static public String checkOutDate;
+    static public String location;
+    static public String room;
+    static public String ppl;
     // Uncomment these following lines when directly opening a frame from main.java
     public User() {
       // this.name = "Airesh Bhat";

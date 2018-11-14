@@ -25,6 +25,8 @@ import java.util.concurrent.TimeUnit;
 public class UserFrame {
   User user = new User();
   private static String Booking = "./src/main/java/static_files/booking.csv";
+  static int MAX_VALID_YR = 9999; 
+  static int MIN_VALID_YR = 1800; 
   ArrayList<String[]> listOfHotels = getListOfHotels();
 
   Calendar gInDate, gOutDate;
@@ -199,6 +201,7 @@ public class UserFrame {
           }
         }
       });
+      String finalCheckIn = checkIn;
       changeDate[i].addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -212,13 +215,31 @@ public class UserFrame {
           outDateTextField.setBounds(200, 70, 170, 30);
           JLabel dCheckOutDate = new JLabel("Check Out Date:");
           dCheckOutDate.setBounds(50, 70, 170, 30);
+          JLabel errorLabel = new JLabel("Error");
+          errorLabel.setBounds(120,120, 125, 50);
+          errorLabel.setVisible(false);
           JButton submitButton = new JButton("SUBMIT");
-          submitButton.setBounds(120, 120, 125, 50);
+          submitButton.setBounds(120, 160, 125, 50);
           submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
               jDialog.setVisible(false);
-              if (HotelStayDetails.isValidDate(inDateTextField.getText()) && HotelStayDetails.isValidDate(outDateTextField.getText())) {
+              if (!isValidDate(inDateTextField.getText())) {
+                errorLabel.setText("Enter Valid Check In Date.");
+                errorLabel.setVisible(true);
+              } else if (!isValidDate(outDateTextField.getText())) {
+                errorLabel.setText("Enter Valid Check Out Date.");
+                errorLabel.setVisible(true);
+              } else if (dateOrder(inDateTextField.getText(), outDateTextField.getText())) {
+                errorLabel.setText("Check In Date must be before Check Out");
+                errorLabel.setVisible(true);
+              } else if ((legitDate(inDateTextField.getText()) || legitDate(outDateTextField.getText()))) {
+                errorLabel.setText("Enter Valid Date");
+                errorLabel.setVisible(true);
+              } else {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                String date = simpleDateFormat.format(Calendar.getInstance().getTime());
+                Date date1, date2;
                 try {
                   SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                   String date = simpleDateFormat.format(Calendar.getInstance().getTime());
@@ -266,7 +287,8 @@ public class UserFrame {
           jDialog.add(dCheckInDate);
           jDialog.add(dCheckOutDate);
           jDialog.add(submitButton);
-          jDialog.setSize(400, 220);
+          jDialog.add(errorLabel);
+          jDialog.setSize(400, 260);
           jDialog.setVisible(true);
         }
       });
@@ -323,4 +345,72 @@ public class UserFrame {
     }
     return listOfHotels;
   }
+
+  private static boolean isValidDate(String enteredDate) { 
+      String[] enteredDateSplit = enteredDate.split("[/]");
+      int d, m, y;
+      try {
+         d = Integer.parseInt(enteredDateSplit[0]);
+         m = Integer.parseInt(enteredDateSplit[1]);
+         y = Integer.parseInt(enteredDateSplit[2]);
+        if (y > MAX_VALID_YR || y < MIN_VALID_YR) 
+          return false; 
+        if (m < 1 || m > 12) 
+          return false; 
+        if (d < 1 || d > 31) 
+          return false; 
+      } catch (NumberFormatException ne) {
+        return false;
+      }
+      // Handle February month 
+      // with leap year 
+      if (m == 2)  
+      { 
+        if (isLeap(y)) 
+          return (d <= 29); 
+        else
+          return (d <= 28); 
+      } 
+
+      if (m == 4 || m == 6 || m == 9 || m == 11) 
+        return (d <= 30); 
+
+      return true; 
+  }
+
+    // check whether the data input from the user is valid
+  protected boolean dateOrder(String checkIn, String checkOut) {
+    Date date1 = null;
+    Date date2 = null;
+    try {
+      SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+      date1 = sdf.parse(checkIn);
+      date2 = sdf.parse(checkOut);
+      if (date1.before(date2)) {
+        return false;
+      }
+    } catch (ParseException ex) {
+      ex.printStackTrace();
+    }
+    return true;
+  }
+
+  protected boolean legitDate(String checkIn) {
+    Date date1 = null;
+    try {
+      SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+      date1 = sdf.parse(checkIn);
+      Date dCurrentDate = sdf.parse(sdf.format(new Date()));
+      if (dCurrentDate.after(date1)) {
+        return true;
+      }
+    } catch (ParseException ex) {
+      ex.printStackTrace();
+    }
+    return false;
+  }
+
+  static boolean isLeap(int year) { 
+    return (((year % 4 == 0) &&  (year % 100 != 0)) ||  (year % 400 == 0)); 
+  } 
 };
