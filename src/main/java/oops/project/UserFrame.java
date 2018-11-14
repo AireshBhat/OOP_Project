@@ -15,6 +15,7 @@ import java.io.IOException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,7 +26,11 @@ public class UserFrame {
   User user = new User();
   private static String Booking = "./src/main/java/static_files/booking.csv";
   ArrayList<String[]> listOfHotels = getListOfHotels();
+
+  Calendar gInDate, gOutDate;
   int numberOfHotels = listOfHotels.size();
+  int hotelPPN = 0;
+  int totalCost = 0;
 
   UserFrame() {
     createJPanel();
@@ -58,6 +63,10 @@ public class UserFrame {
         return new Dimension(1000, startingHeight + (300 * numberOfHotels));
       };
     };
+
+    // JLabel testing = new JLabel("Testing");
+    // testing.setBounds(600, 200, 300, 40);
+    // jp.add(testing);
 
     JLabel name = new JLabel(user.getName());
     name.setBounds(500, 20, 150, 40);
@@ -92,6 +101,7 @@ public class UserFrame {
     jp.add(logOut);
 
     String hName, hPrice, hAddress, hAccom, hPpl, checkIn, checkOut, hBookRef;
+    int pricePerNight = 0;
 
     for (int i = 0; i < numberOfHotels; i++) {
       String[] item = listOfHotels.get(i);
@@ -100,10 +110,39 @@ public class UserFrame {
       hPpl = item[3];
       checkIn = item[4];
       checkOut = item[5];
+      // pricePerNight = item[6];
+
+      // Calculate the Total Cost even on change of dates
+      String[] parsedInDate = item[4].split("/");
+      int gInDay = Integer.parseInt(parsedInDate[0]);
+      int gInMonth = Integer.parseInt(parsedInDate[1]);
+      int gInYear = Integer.parseInt(parsedInDate[2]);
+      String[] parsedOutDate = item[5].split("/");
+      int gOutDay = Integer.parseInt(parsedOutDate[0]);
+      int gOutMonth = Integer.parseInt(parsedOutDate[1]);
+      int gOutYear = Integer.parseInt(parsedOutDate[2]);
+      gInDate = Calendar.getInstance();
+      gOutDate = Calendar.getInstance();
+      gInDate.set(gInYear, gInMonth, gInDay);
+      gOutDate.set(gOutYear, gOutMonth, gOutDay);
+      Date startDate = gInDate.getTime();
+      Date endDate = gOutDate.getTime();
+      long startTime = startDate.getTime();
+      long endTime = endDate.getTime();
+      long diffTime = endTime - startTime;
+      long diffDays = diffTime / (1000 * 60 * 60 * 24);
+      try {
+        hotelPPN = NumberFormat.getNumberInstance(java.util.Locale.US).parse(item[6]).intValue();
+      } catch (ParseException ee){
+        // testing.setText("numberFormat");
+        ee.printStackTrace();
+      }
+      long totalCost = diffDays * hotelPPN * (long)Integer.valueOf(user.getRoom());
+
       hPrice = item[6];
       hBookRef = item[7];
       hotelName[i] = new JLabel(hName);
-      hotelPrice[i] = new JLabel("Total Cost: " + hotelPrice);
+      hotelPrice[i] = new JLabel("Total Cost: " + totalCost);
       hotelAddress[i] = new JLabel(hAddress);
       hotelAccom[i] = new JLabel("Gold");
       hotelPpl[i] = new JLabel("No. Of Guests: " + hPpl);
@@ -116,11 +155,12 @@ public class UserFrame {
       hotelAccom[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block, 200, block * 2);
       hotelAddress[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 4, 300, block * 2);
       hotelPpl[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 4, 200, block * 2);
-      hCheckInDate[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 6, 200, block * 2);
-      hCheckOutDate[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 6, 200, block * 2);
-      hBookingReference[i].setBounds(block * 33, startingHeight + (heightBlock * i) + block * 8, 200, block * 2);
-      changeDate[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
-      cancel[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
+      hCheckInDate[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 8, 200, block * 2);
+      hCheckOutDate[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 8, 200, block * 2);
+      hBookingReference[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
+      hotelPrice[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
+      changeDate[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 12, 200, block * 2);
+      cancel[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 12, 200, block * 2);
       String finalHBookRef = hBookRef;
       cancel[i].addActionListener(new ActionListener() {
         @Override
@@ -225,6 +265,7 @@ public class UserFrame {
       });
       jp.add(hotelName[i]);
       jp.add(hotelPpl[i]);
+      jp.add(hotelPrice[i]);
       jp.add(hotelAddress[i]);
       jp.add(hotelAccom[i]);
       jp.add(hotelPpl[i]);

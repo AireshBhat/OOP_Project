@@ -157,7 +157,7 @@ public class HotelList {
             }
             long totalCost = diffDays * hotelPPN * (long)Integer.valueOf(user.getRoom());
             testing.setText(Long.toString(totalCost));
-            bk.init(item[0], Long.toString(totalCost), item[1], item[8], item[7]);
+            bk.init(item[0], Long.toString(totalCost), item[1], item[8], item[7], hotelPPN);
             jFrame.dispose();
           }
         });
