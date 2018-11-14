@@ -1,13 +1,10 @@
 package oops.project;
 
-import oops.hotel_list_page.*;
-
-public class Main {
+public class Main extends FrameControl {
     public static void main(String args[]) {
-      FrameControl fm = new FrameControl();
       // fm.runUserFrame();
       // fm.runHotelListFrame();
-      fm.runLoginScreen();
+      runLoginScreen();
       // Login lg = new Login();
       // NewUserSignup nus = new NewUserSignup();
       // nus.init();

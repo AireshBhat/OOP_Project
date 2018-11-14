@@ -8,10 +8,11 @@ import java.awt.event.ActionListener;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Login {
+class Login {
     // Create an object from user class
-    FrameControl fm = new FrameControl();
-    protected void init() {
+    private FrameControl fm = new FrameControl();
+
+    void init() {
         JFrame jFrame = new JFrame("Login");
         jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
@@ -37,8 +38,7 @@ public class Login {
                     //login user
                     fm.runHotelStayDetailsFrame();
                     jFrame.dispose();
-                }
-                else {
+                } else {
                     invalidLogin.setVisible(true);
                     // jFrame.dispose();
                     // Open the New User Sign up frame
@@ -77,20 +77,19 @@ public class Login {
             String[] record;
             int recordLength = 0;
             while ((record = csvReader.readNext()) != null) {
-              recordLength = record.length;
                 if (record[0].equals(username) && record[3].equals(password)) {
                     User user = new User(
-                        record[0],
-                        record[1],
-                        record[2],
-                        record[3],
-                        record[4],
-                        record[5],
-                        record[6],
-                        record[7],
-                        record[8],
-                        record[9]
-                        );
+                            record[0],
+                            record[1],
+                            record[2],
+                            record[3],
+                            record[4],
+                            record[5],
+                            record[6],
+                            record[7],
+                            record[8],
+                            record[9]
+                    );
                     return true;
                 }
             }
@@ -98,11 +97,6 @@ public class Login {
             fileReader.close();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-          // try {
-          // } catch (IOException ee) {
-            // ee.printStackTrace();
-          // }
         }
         return false;
     }

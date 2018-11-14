@@ -181,235 +181,281 @@ public class UserFrame {
               jDialog.setVisible(true);
             }
             try {
-              CSVReader csvReader = new CSVReader(new FileReader(Booking));
-              List<String[]> stringList = new ArrayList<String[]>();
-              String[] record;
-              while ((record = csvReader.readNext()) != null && !record[7].equals(finalHBookRef)) {
-                stringList.add(record);
-              }
-              csvReader.close();
-              CSVWriter csvWriter = new CSVWriter(new FileWriter(Booking, false));
-              csvWriter.writeAll(stringList);
-              csvWriter.close();
-              fm.runUserFrame();
-              jFrame.dispose();
-            } catch (IOException e1) {
-              e1.printStackTrace();
+                hotelPPN = NumberFormat.getNumberInstance(java.util.Locale.US).parse(item[6]).intValue();
+            } catch (ParseException ee) {
+                // testing.setText("numberFormat");
+                ee.printStackTrace();
             }
-          } catch (ParseException e1) {
-            e1.printStackTrace();
-          }
-        }
-      });
-      String finalCheckIn = checkIn;
-      changeDate[i].addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-          JDialog jDialog = new JDialog(jFrame, "Enter new dates");
-          jDialog.setLayout(null);
-          JTextField inDateTextField = new JTextField("DD/MM/YYYY");
-          inDateTextField.setBounds(200, 10, 170, 30);
-          JLabel dCheckInDate = new JLabel("Check In Date:");
-          dCheckInDate.setBounds(50, 10, 170, 30);
-          JTextField outDateTextField = new JTextField("DD/MM/YYYY");
-          outDateTextField.setBounds(200, 70, 170, 30);
-          JLabel dCheckOutDate = new JLabel("Check Out Date:");
-          dCheckOutDate.setBounds(50, 70, 170, 30);
-          JLabel errorLabel = new JLabel("Error");
-          errorLabel.setBounds(120,120, 125, 50);
-          errorLabel.setVisible(false);
-          JButton submitButton = new JButton("SUBMIT");
-          submitButton.setBounds(120, 160, 125, 50);
-          submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-              jDialog.setVisible(false);
-              if (!isValidDate(inDateTextField.getText())) {
-                errorLabel.setText("Enter Valid Check In Date.");
-                errorLabel.setVisible(true);
-              } else if (!isValidDate(outDateTextField.getText())) {
-                errorLabel.setText("Enter Valid Check Out Date.");
-                errorLabel.setVisible(true);
-              } else if (dateOrder(inDateTextField.getText(), outDateTextField.getText())) {
-                errorLabel.setText("Check In Date must be before Check Out");
-                errorLabel.setVisible(true);
-              } else if ((legitDate(inDateTextField.getText()) || legitDate(outDateTextField.getText()))) {
-                errorLabel.setText("Enter Valid Date");
-                errorLabel.setVisible(true);
-              } else {
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                String date = simpleDateFormat.format(Calendar.getInstance().getTime());
-                Date date1, date2;
-                try {
-                  SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
-                  String d = simpleDateFormat1.format(Calendar.getInstance().getTime());
-                  Date d1, d2 = null;
-                  CSVReader csvReader = new CSVReader(new FileReader(Booking));
-                  String[] record;
-                  while ((record = csvReader.readNext()) != null) {
-                    if (record[7].equals(finalHBookRef)) {
-                      d2 = simpleDateFormat1.parse(record[8]);
-                      break;
-                    }
-                  }
-                  if (d2 == null) {
-                    return; //IO error
-                  }
-                  d1 = simpleDateFormat.parse(d);
-                  if (TimeUnit.DAYS.convert(d1.getTime() - d2.getTime(), TimeUnit.MILLISECONDS) > 3) {
-                    JOptionPane.showMessageDialog(jp, "Cannot change booking after 3 days from booking.", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                  }
-                  List<String[]> stringList = new ArrayList<String[]>();
-                  while ((record = csvReader.readNext()) != null) {
-                    if (record[7].equals(finalHBookRef)) {
-                      record[4] = inDateTextField.getText();
-                      record[5] = outDateTextField.getText();
-                    }
-                    stringList.add(record);
-                  }
-                  csvReader.close();
+            long totalCost = diffDays * hotelPPN * (long) Integer.valueOf(user.getRoom());
 
-                  CSVWriter csvWriter = new CSVWriter(new FileWriter(Booking, false));
-                  csvWriter.writeAll(stringList);
-                  csvWriter.close();
-                  fm.runUserFrame();
-                  jFrame.dispose();
-                } catch (IOException | ParseException e1) {
-                  e1.printStackTrace();
+            hBookRef = item[7];
+            hotelName[i] = new JLabel(hName);
+            hotelPrice[i] = new JLabel("Total Cost: " + totalCost);
+            hotelAddress[i] = new JLabel(hAddress);
+            hotelAccom[i] = new JLabel("Gold");
+            hotelPpl[i] = new JLabel("No. Of Guests: " + hPpl);
+            hCheckInDate[i] = new JLabel("In Date: " + checkIn);
+            hCheckOutDate[i] = new JLabel("Out Date: " + checkOut);
+            hBookingReference[i] = new JLabel("Booking Reference: " + hBookRef);
+            changeDate[i] = new JButton("Change Date");
+            cancel[i] = new JButton("Cancel Booking");
+            hotelName[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block, 300, block * 2);
+            hotelAccom[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block, 200, block * 2);
+            hotelAddress[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 4, 300, block * 2);
+            hotelPpl[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 4, 200, block * 2);
+            hCheckInDate[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 8, 200, block * 2);
+            hCheckOutDate[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 8, 200, block * 2);
+            hBookingReference[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
+            hotelPrice[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 10, 200, block * 2);
+            changeDate[i].setBounds(block * 20, startingHeight + (heightBlock * i) + block * 12, 200, block * 2);
+            cancel[i].setBounds(block * 42, startingHeight + (heightBlock * i) + block * 12, 200, block * 2);
+            String finalHBookRef = hBookRef;
+            cancel[i].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    String date = simpleDateFormat.format(Calendar.getInstance().getTime());
+                    Date date1, date2;
+                    try {
+                        date1 = simpleDateFormat.parse(date);
+                        date2 = simpleDateFormat.parse(user.getCheckInDate());
+                        if (TimeUnit.DAYS.convert(date2.getTime() - date1.getTime(), TimeUnit.MILLISECONDS) < 2) {
+                            JDialog jDialog = new JDialog(jFrame, "Alert");
+                            jDialog.setLayout(null);
+                            JTextField alertTextField = new JTextField("You will be charged 50% of the total fee!");
+                            jDialog.add(alertTextField);
+                            jDialog.setVisible(true);
+                        }
+                        try {
+                            CSVReader csvReader = new CSVReader(new FileReader(Booking));
+                            List<String[]> stringList = new ArrayList<String[]>();
+                            String[] record;
+                            while ((record = csvReader.readNext()) != null && !record[7].equals(finalHBookRef)) {
+                                stringList.add(record);
+                            }
+                            csvReader.close();
+                            CSVWriter csvWriter = new CSVWriter(new FileWriter(Booking, false));
+                            csvWriter.writeAll(stringList);
+                            csvWriter.close();
+                            fm.runUserFrame();
+                            jFrame.dispose();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                    } catch (ParseException e1) {
+                        e1.printStackTrace();
+                    }
                 }
-              }
+            });
+            String finalCheckIn = checkIn;
+            changeDate[i].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JDialog jDialog = new JDialog(jFrame, "Enter new dates");
+                    jDialog.setLayout(null);
+                    JTextField inDateTextField = new JTextField("DD/MM/YYYY");
+                    inDateTextField.setBounds(200, 10, 170, 30);
+                    JLabel dCheckInDate = new JLabel("Check In Date:");
+                    dCheckInDate.setBounds(50, 10, 170, 30);
+                    JTextField outDateTextField = new JTextField("DD/MM/YYYY");
+                    outDateTextField.setBounds(200, 70, 170, 30);
+                    JLabel dCheckOutDate = new JLabel("Check Out Date:");
+                    dCheckOutDate.setBounds(50, 70, 170, 30);
+                    JLabel errorLabel = new JLabel("Error");
+                    errorLabel.setBounds(120, 120, 125, 50);
+                    errorLabel.setVisible(false);
+                    JButton submitButton = new JButton("SUBMIT");
+                    submitButton.setBounds(120, 160, 125, 50);
+                    submitButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            jDialog.setVisible(false);
+                            if (!isValidDate(inDateTextField.getText())) {
+                                errorLabel.setText("Enter Valid Check In Date.");
+                                errorLabel.setVisible(true);
+                            } else if (!isValidDate(outDateTextField.getText())) {
+                                errorLabel.setText("Enter Valid Check Out Date.");
+                                errorLabel.setVisible(true);
+                            } else if (dateOrder(inDateTextField.getText(), outDateTextField.getText())) {
+                                errorLabel.setText("Check In Date must be before Check Out");
+                                errorLabel.setVisible(true);
+                            } else if ((legitDate(inDateTextField.getText()) || legitDate(outDateTextField.getText()))) {
+                                errorLabel.setText("Enter Valid Date");
+                                errorLabel.setVisible(true);
+                            } else {
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                String date = simpleDateFormat.format(Calendar.getInstance().getTime());
+                                Date date1, date2 = null;
+                                try {
+                                    CSVReader csvReader = new CSVReader(new FileReader(Booking));
+                                    String[] record;
+                                    while ((record = csvReader.readNext()) != null) {
+                                        if (record[7].equals(finalHBookRef)) {
+                                            date2 = simpleDateFormat.parse(record[8]);
+                                            break;
+                                        }
+                                    }
+                                    if (date2 == null) {
+                                        return; //IO error
+                                    }
+                                    date1 = simpleDateFormat.parse(date);
+                                    if (TimeUnit.DAYS.convert(date1.getTime() - date2.getTime(), TimeUnit.MILLISECONDS) > 3) {
+                                        JOptionPane.showMessageDialog(jp, "Cannot change booking after 3 days from booking.", "Error", JOptionPane.ERROR_MESSAGE);
+                                        return;
+                                    }
+                                    csvReader = new CSVReader(new FileReader(Booking));
+                                    List<String[]> stringList = new ArrayList<String[]>();
+                                    while ((record = csvReader.readNext()) != null) {
+                                        if (record[7].equals(finalHBookRef)) {
+                                            record[4] = inDateTextField.getText();
+                                            record[5] = outDateTextField.getText();
+                                        }
+                                        stringList.add(record);
+                                    }
+                                    csvReader.close();
+
+                                    CSVWriter csvWriter = new CSVWriter(new FileWriter(Booking, false));
+                                    csvWriter.writeAll(stringList);
+                                    csvWriter.close();
+                                    fm.runUserFrame();
+                                    jFrame.dispose();
+                                } catch (IOException | ParseException e1) {
+                                    e1.printStackTrace();
+                                }
+                            }
+                        }
+                    });
+                    jDialog.add(inDateTextField);
+                    jDialog.add(outDateTextField);
+                    jDialog.add(dCheckInDate);
+                    jDialog.add(dCheckOutDate);
+                    jDialog.add(submitButton);
+                    jDialog.add(errorLabel);
+                    jDialog.setSize(400, 260);
+                    jDialog.setVisible(true);
+                }
+            });
+            jp.add(hotelName[i]);
+            jp.add(hotelPpl[i]);
+            jp.add(hotelPrice[i]);
+            jp.add(hotelAddress[i]);
+            jp.add(hotelAccom[i]);
+            jp.add(hotelPpl[i]);
+            jp.add(hCheckInDate[i]);
+            jp.add(hCheckOutDate[i]);
+            jp.add(hBookingReference[i]);
+            jp.add(changeDate[i]);
+            jp.add(cancel[i]);
+        }
+    }
+
+    private void createJScrollPane() {
+        jsp = new JScrollPane(jp) {
+            @Override
+            public Dimension getPreferredSize() {
+                return new Dimension(1080, 720);
             }
-          });
-          jDialog.add(inDateTextField);
-          jDialog.add(outDateTextField);
-          jDialog.add(dCheckInDate);
-          jDialog.add(dCheckOutDate);
-          jDialog.add(submitButton);
-          jDialog.add(errorLabel);
-          jDialog.setSize(400, 260);
-          jDialog.setVisible(true);
-        }
-      });
-      jp.add(hotelName[i]);
-      jp.add(hotelPpl[i]);
-      jp.add(hotelPrice[i]);
-      jp.add(hotelAddress[i]);
-      jp.add(hotelAccom[i]);
-      jp.add(hotelPpl[i]);
-      jp.add(hCheckInDate[i]);
-      jp.add(hCheckOutDate[i]);
-      jp.add(hBookingReference[i]);
-      jp.add(changeDate[i]);
-      jp.add(cancel[i]);
+
+        };
+        jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        jsp.setLocation(0, 0);
+        jsp.setSize(1080, 720);
     }
-  }
 
-  private void createJScrollPane() {
-    jsp = new JScrollPane(jp) {
-      @Override
-      public Dimension getPreferredSize() {
-        return new Dimension(1080, 720);
-      };
-    };
-    jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-    jsp.setLocation(0, 0);
-    jsp.setSize(1080, 720);
-  }
+    private void createJFrame() {
+        jFrame = new JFrame();
+        jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
-  private void createJFrame() {
-    jFrame = new JFrame();
-    jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-
-    jFrame.getContentPane().add(jsp);
-    jFrame.setSize(1080, 720);
-    jFrame.setVisible(true);
-  }
-
-  private ArrayList<String[]> getListOfHotels() {
-    ArrayList<String []> listOfHotels = new ArrayList<String []>();
-    int counter = 0;
-    try {
-      CSVReader csr = new CSVReader(new FileReader(Booking));
-      String[] recordReaderEach;
-      while ((recordReaderEach = csr.readNext()) != null) {
-        if (recordReaderEach[0].equals(user.getUserName())) {
-          counter++;
-          listOfHotels.add(recordReaderEach);
-        }
-      }
-      csr.close();
-    } catch (IOException e) {
-      e.printStackTrace();
+        jFrame.getContentPane().add(jsp);
+        jFrame.setSize(1080, 720);
+        jFrame.setVisible(true);
     }
-    return listOfHotels;
-  }
 
-  private static boolean isValidDate(String enteredDate) { 
-      String[] enteredDateSplit = enteredDate.split("[/]");
-      int d, m, y;
-      try {
-         d = Integer.parseInt(enteredDateSplit[0]);
-         m = Integer.parseInt(enteredDateSplit[1]);
-         y = Integer.parseInt(enteredDateSplit[2]);
-        if (y > MAX_VALID_YR || y < MIN_VALID_YR) 
-          return false; 
-        if (m < 1 || m > 12) 
-          return false; 
-        if (d < 1 || d > 31) 
-          return false; 
-      } catch (NumberFormatException ne) {
-        return false;
-      }
-      // Handle February month 
-      // with leap year 
-      if (m == 2)  
-      { 
-        if (isLeap(y)) 
-          return (d <= 29); 
-        else
-          return (d <= 28); 
-      } 
+    private ArrayList<String[]> getListOfHotels() {
+        ArrayList<String[]> listOfHotels = new ArrayList<String[]>();
+        int counter = 0;
+        try {
+            CSVReader csr = new CSVReader(new FileReader(Booking));
+            String[] recordReaderEach;
+            while ((recordReaderEach = csr.readNext()) != null) {
+                if (recordReaderEach[0].equals(user.getUserName())) {
+                    counter++;
+                    listOfHotels.add(recordReaderEach);
+                }
+            }
+            csr.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return listOfHotels;
+    }
 
-      if (m == 4 || m == 6 || m == 9 || m == 11) 
-        return (d <= 30); 
+    private static boolean isValidDate(String enteredDate) {
+        String[] enteredDateSplit = enteredDate.split("[/]");
+        int d, m, y;
+        try {
+            d = Integer.parseInt(enteredDateSplit[0]);
+            m = Integer.parseInt(enteredDateSplit[1]);
+            y = Integer.parseInt(enteredDateSplit[2]);
+            int MIN_VALID_YR = 1800;
+            int MAX_VALID_YR = 9999;
+            if (y > MAX_VALID_YR || y < MIN_VALID_YR)
+                return false;
+            if (m < 1 || m > 12)
+                return false;
+            if (d < 1 || d > 31)
+                return false;
+        } catch (NumberFormatException ne) {
+            return false;
+        }
+        // Handle February month
+        // with leap year
+        if (m == 2) {
+            if (isLeap(y))
+                return (d <= 29);
+            else
+                return (d <= 28);
+        }
 
-      return true; 
-  }
+        if (m == 4 || m == 6 || m == 9 || m == 11)
+            return (d <= 30);
+
+        return true;
+    }
 
     // check whether the data input from the user is valid
-  protected boolean dateOrder(String checkIn, String checkOut) {
-    Date date1 = null;
-    Date date2 = null;
-    try {
-      SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-      date1 = sdf.parse(checkIn);
-      date2 = sdf.parse(checkOut);
-      if (date1.before(date2)) {
-        return false;
-      }
-    } catch (ParseException ex) {
-      ex.printStackTrace();
-    }
-    return true;
-  }
-
-  protected boolean legitDate(String checkIn) {
-    Date date1 = null;
-    try {
-      SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-      date1 = sdf.parse(checkIn);
-      Date dCurrentDate = sdf.parse(sdf.format(new Date()));
-      if (dCurrentDate.after(date1)) {
+    private boolean dateOrder(String checkIn, String checkOut) {
+        Date date1;
+        Date date2;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            date1 = sdf.parse(checkIn);
+            date2 = sdf.parse(checkOut);
+            if (date1.before(date2)) {
+                return false;
+            }
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
         return true;
-      }
-    } catch (ParseException ex) {
-      ex.printStackTrace();
     }
-    return false;
-  }
 
-  static boolean isLeap(int year) { 
-    return (((year % 4 == 0) &&  (year % 100 != 0)) ||  (year % 400 == 0)); 
-  } 
-};
+    private boolean legitDate(String checkIn) {
+        Date date1;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            date1 = sdf.parse(checkIn);
+            Date dCurrentDate = sdf.parse(sdf.format(new Date()));
+            if (dCurrentDate.after(date1)) {
+                return true;
+            }
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    private static boolean isLeap(int year) {
+        return (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0));
+    }
+}
