@@ -10,13 +10,10 @@ import java.awt.event.ActionListener;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class NewUserSignup {
 
-    HotelStayDetailsLogic hsl = new HotelStayDetailsLogic();
+    private HotelStayDetailsLogic hsl = new HotelStayDetailsLogic();
 
     protected static final String FILE = "./src/main/java/static_files/users.csv";
 
@@ -28,11 +25,11 @@ public class NewUserSignup {
         backButton.setBounds(100, 20, 100, 40);
         jFrame.add(backButton);
         backButton.addActionListener(new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-            fc.runLoginScreen();
-            jFrame.dispose();
-          }
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fc.runLoginScreen();
+                jFrame.dispose();
+            }
         });
 
         JTextField nameTextField = new JTextField("Name");
@@ -73,16 +70,16 @@ public class NewUserSignup {
                             FileWriter fileWriter = new FileWriter(FILE, true);
                             CSVWriter csvWriter = new CSVWriter(fileWriter);
                             String[] data = {
-                              userNameTextField.getText(),
-                              nameTextField.getText(),
-                              birthDateTextField.getText(),
-                              passwordTextField.getText(),
-                              addressTextField.getText(),
-                              "",
-                              "",
-                              "",
-                              "",
-                              "",
+                                    userNameTextField.getText(),
+                                    nameTextField.getText(),
+                                    birthDateTextField.getText(),
+                                    passwordTextField.getText(),
+                                    addressTextField.getText(),
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
                             };
                             csvWriter.writeNext(data);
                             csvWriter.close();
@@ -121,14 +118,14 @@ public class NewUserSignup {
                     return -1;
                 }
             }
-          csvReader.close();
-          fileReader.close();
+            csvReader.close();
+            fileReader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         String[] birthdaySplit = birthDate.split("[/]");
-        if (!hsl.isValidDate(Integer.parseInt(birthdaySplit[0]), Integer.parseInt(birthdaySplit[1]), Integer.parseInt(birthdaySplit[2]))) {
+        if (!HotelStayDetailsLogic.isValidDate(Integer.parseInt(birthdaySplit[0]), Integer.parseInt(birthdaySplit[1]), Integer.parseInt(birthdaySplit[2]))) {
             return -2;
         }
 
