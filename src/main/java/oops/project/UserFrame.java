@@ -186,9 +186,6 @@ public class UserFrame {
                 // testing.setText("numberFormat");
                 ee.printStackTrace();
             }
-          } finally {}
-        }
-      });
             long totalCost = diffDays * hotelPPN * (long) Integer.valueOf(user.getRoom());
 
             hBookRef = item[7];
