@@ -16,11 +16,9 @@ import java.text.SimpleDateFormat;
 // Class that implements all the login in the frame
 public class HotelStayDetailsLogic {
     private User user = new User();
-    private static int MAX_VALID_YR = 9999;
-    private static int MIN_VALID_YR = 1800;
 
     // check whether the data input from the user is valid
-    protected boolean dateOrder(String checkIn, String checkOut) {
+    boolean dateOrder(String checkIn, String checkOut) {
         Date date1;
         Date date2;
         try {
@@ -36,7 +34,7 @@ public class HotelStayDetailsLogic {
         return true;
     }
 
-    protected boolean legitDate(String checkIn) {
+    boolean legitDate(String checkIn) {
         Date date1;
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -56,6 +54,8 @@ public class HotelStayDetailsLogic {
     }
 
     public static boolean isValidDate(int d, int m, int y) {
+        int MIN_VALID_YR = 1800;
+        int MAX_VALID_YR = 9999;
         if (y > MAX_VALID_YR || y < MIN_VALID_YR)
             return false;
         if (m < 1 || m > 12)
@@ -83,7 +83,7 @@ public class HotelStayDetailsLogic {
     // Then remove the row of the user who has inputted the data
     // Then add the row of the user with the extra data inputted by the user
     // Then add all the contents into the csv again
-    protected int addData(String location, String checkIn, String checkOut, String room, String ppl) {
+    void addData(String location, String checkIn, String checkOut, String room, String ppl) {
         user.setCheckInDate(checkIn);
         user.setCheckOutDate(checkOut);
         user.setRoom(room);
@@ -127,6 +127,5 @@ public class HotelStayDetailsLogic {
         } catch (IOException ee) {
             ee.printStackTrace();
         }
-        return 1;
     }
 }

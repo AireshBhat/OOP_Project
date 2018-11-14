@@ -8,11 +8,11 @@ import java.awt.event.ActionListener;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Login {
+class Login {
     // Create an object from user class
     private FrameControl fm = new FrameControl();
 
-    protected void init() {
+    void init() {
         JFrame jFrame = new JFrame("Login");
         jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
