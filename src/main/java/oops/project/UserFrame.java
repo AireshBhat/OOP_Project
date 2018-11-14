@@ -184,8 +184,11 @@ public class UserFrame {
               CSVReader csvReader = new CSVReader(new FileReader(Booking));
               List<String[]> stringList = new ArrayList<String[]>();
               String[] record;
-              while ((record = csvReader.readNext()) != null && !record[7].equals(finalHBookRef)) {
-                stringList.add(record);
+              while ((record = csvReader.readNext()) != null) {
+                if (!record[7].equals(finalHBookRef)) {
+                  System.out.print(record);
+                  stringList.add(record);
+                }
               }
               csvReader.close();
               CSVWriter csvWriter = new CSVWriter(new FileWriter(Booking, false));

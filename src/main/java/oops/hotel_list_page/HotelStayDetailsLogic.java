@@ -122,8 +122,8 @@ public class HotelStayDetailsLogic {
             csw.writeAll(recordReaderWhole);
             fr.close();
             csr.close();
-            fw.close();
             csw.close();
+            fw.close();
         } catch (IOException ee) {
             ee.printStackTrace();
         }
