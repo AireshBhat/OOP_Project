@@ -3,25 +3,25 @@ package oops.project;
 import oops.hotel_list_page.*;
 
 public class FrameControl {
-    public void runLoginScreen() {
+    static public void runLoginScreen() {
         Login lg = new Login();
         lg.init();
     }
 
-    public void runNewUserSignup() {
+    static public void runNewUserSignup() {
         NewUserSignup nus = new NewUserSignup();
         nus.init();
     }
 
-    public void runHotelStayDetailsFrame() {
+    static public void runHotelStayDetailsFrame() {
         HotelStayDetails hsd = new HotelStayDetails();
     }
 
-    public void runHotelListFrame() {
+    static public void runHotelListFrame() {
         HotelList hl = new HotelList();
     }
 
-    public void runUserFrame() {
+    static public void runUserFrame() {
         UserFrame uf = new UserFrame();
     }
 }
