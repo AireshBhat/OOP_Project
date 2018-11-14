@@ -1,13 +1,17 @@
 package oops.project;
 
 import com.opencsv.CSVWriter;
+import com.opencsv.CSVReader;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
@@ -35,6 +39,9 @@ public class Booking {
             jFrame.dispose();
           }
         });
+
+        // JLabel testing = new JLabel("Testing");
+        // testing.setBounds(700, 100, 200, );
 
         JLabel hotelNameLabel = new JLabel("Hotel Name:");
         hotelNameLabel.setBounds(250, 100, 200, 40);
@@ -101,8 +108,14 @@ public class Booking {
                     CSVWriter csvWriter = new CSVWriter(fileWriter);
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                     String date = simpleDateFormat.format(Calendar.getInstance().getTime());
-                    String[] data = {username, hName, hAddress, hAccom, user.getCheckInDate(), user.getCheckOutDate(), hPrice, String.valueOf(rand), date, hType, Integer.toString(pricePerNight)};
+                    if (waitListed(username, hName, hAddress, hType, user.checkInDate, user.checkOutDate)) {
+                    String[] data = {username, hName, hAddress, hAccom, user.getCheckInDate(), user.getCheckOutDate(), hPrice, String.valueOf(rand), date, hType, Integer.toString(pricePerNight), "waitlisted"};
                     csvWriter.writeNext(data);
+                    } else {
+                    String[] data = {username, hName, hAddress, hAccom, user.getCheckInDate(), user.getCheckOutDate(), hPrice, String.valueOf(rand), date, hType, Integer.toString(pricePerNight), ""};
+                    csvWriter.writeNext(data);
+                    }
+                    // csvWriter.writeNext(data);
                     csvWriter.close();
                     fileWriter.close();
                 } catch (IOException e1) {
@@ -115,5 +128,34 @@ public class Booking {
         jFrame.setSize(1080, 720);
         jFrame.setLayout(null);
         jFrame.setVisible(true);
+    }
+    private boolean waitListed(String username, String hName, String hAddress, String hType, String checkIn, String checkOut) {
+      Date checkInBooking = null;
+      Date checkOutBooking = null;
+      Date checkedIn = null;
+      Date checkedOut = null;
+      try {
+        CSVReader csr = new CSVReader(new FileReader(BOOKING));
+        String[] recordReaderEach;
+        while ((recordReaderEach = csr.readNext()) != null) {
+          // if true return true
+          if ((recordReaderEach[1].equals(hName)) && (recordReaderEach[2].equals(hAddress)) && (recordReaderEach[9].equals(hType))) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            checkInBooking = sdf.parse(checkIn);
+            checkOutBooking = sdf.parse(checkOut);
+            checkedIn = sdf.parse(recordReaderEach[4]);
+            checkedOut = sdf.parse(recordReaderEach[5]);
+            if ((checkInBooking.after(checkedIn) && checkInBooking.before(checkedOut))
+                || (checkOutBooking.after(checkedIn) && checkOutBooking.before(checkedOut))) {
+              return true;
+            }
+          }
+        }
+      } catch (IOException ie) {
+        ie.printStackTrace();
+      } catch (ParseException pe) {
+        pe.printStackTrace();
+      }
+      return false;
     }
 }

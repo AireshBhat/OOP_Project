@@ -241,22 +241,22 @@ public class UserFrame {
                 String date = simpleDateFormat.format(Calendar.getInstance().getTime());
                 Date date1, date2;
                 try {
-                  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                  String date = simpleDateFormat.format(Calendar.getInstance().getTime());
-                  Date date1, date2 = null;
+                  SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
+                  String d = simpleDateFormat1.format(Calendar.getInstance().getTime());
+                  Date d1, d2 = null;
                   CSVReader csvReader = new CSVReader(new FileReader(Booking));
                   String[] record;
                   while ((record = csvReader.readNext()) != null) {
                     if (record[7].equals(finalHBookRef)) {
-                      date2 = simpleDateFormat.parse(record[8]);
+                      d2 = simpleDateFormat1.parse(record[8]);
                       break;
                     }
                   }
-                  if (date2 == null) {
+                  if (d2 == null) {
                     return; //IO error
                   }
-                  date1 = simpleDateFormat.parse(date);
-                  if (TimeUnit.DAYS.convert(date1.getTime() - date2.getTime(), TimeUnit.MILLISECONDS) > 3) {
+                  d1 = simpleDateFormat.parse(d);
+                  if (TimeUnit.DAYS.convert(d1.getTime() - d2.getTime(), TimeUnit.MILLISECONDS) > 3) {
                     JOptionPane.showMessageDialog(jp, "Cannot change booking after 3 days from booking.", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                   }
