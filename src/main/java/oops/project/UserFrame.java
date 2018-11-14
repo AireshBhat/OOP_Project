@@ -239,6 +239,7 @@ public class UserFrame {
                     JOptionPane.showMessageDialog(jp, "Cannot change booking after 3 days from booking.", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                   }
+                  csvReader = new CSVReader(new FileReader(Booking));
                   List<String[]> stringList = new ArrayList<String[]>();
                   while ((record = csvReader.readNext()) != null) {
                     if (record[7].equals(finalHBookRef)) {
